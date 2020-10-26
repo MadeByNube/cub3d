@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   finalizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 11:48:52 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/26 11:15:20 by cnavarro         ###   ########.fr       */
+/*   Created: 2020/10/26 11:07:17 by cnavarro          #+#    #+#             */
+/*   Updated: 2020/10/26 11:22:42 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-int	main(int args, char **argv)
+void	ft_frees(t_datos *dat)
 {
-	int i;
-	if (args != 3)
-		i = 0;
-	i = 0;
-	t_datos	*dat;
-
-	if (!(dat = (t_datos *)malloc(sizeof(t_datos))))
-		return (-1);
-	ft_genmap(argv[1], dat);
-	dat->mapname = argv[1];
-	ft_errors(dat);
-	//ft_frees(dat);
-	return(0);
+	if (dat->mapa)
+		free(dat->mapa);
+	if (dat->r)
+		free(dat->r);
+	if (dat->no)
+		free(dat->no);
+	if (dat->so)
+		free(dat->so);
+	if (dat->we)
+		free(dat->we);
+	if (dat->ea)
+		free(dat->ea);
+	if (dat->s)
+		free(dat->s);
+	if (dat->f)
+		free(dat->f);
+	if (dat->c)
+		free(dat->c);
+	if (dat->mapname)
+		free(dat->mapname);
 }

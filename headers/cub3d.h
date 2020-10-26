@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/20 13:50:15 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/10/26 11:10:05 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void		ft_errors(t_datos *dat);
 void		ft_errorsmap(t_datos *dat);
 void		ft_valmap(char **mapa, t_datos *dat);
 void		ft_valmap2(char **mapa, int x, int y, t_datos *dat);
+
+void	ft_frees(t_datos *dat);
 
 #endif
