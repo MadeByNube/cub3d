@@ -23,23 +23,24 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 	while((comp = getnextline(&line, fdmap)) > 0)
 	{
 		if (line[0] == 'R' && line[1] == ' ')
-			dat->r = line;
+			dat->r = ft_strdup(line);
 		else if (line[0] == 'N' && line[1] == 'O')
-			dat->no = line;
+			dat->no = ft_strdup(line);
 		else if (line[0] == 'S' && line[1] == 'O')
-			dat->so = line;
+			dat->so = ft_strdup(line);
 		else if (line[0] == 'W' && line[1] == 'E')
-			dat->we = line;
+			dat->we = ft_strdup(line);
 		else if (line[0] == 'E' && line[1] == 'A')
-			dat->ea = line;
+			dat->ea = ft_strdup(line);
 		else if (line[0] == 'S' && line[1] == ' ')
-			dat->s = line;
+			dat->s = ft_strdup(line);
 		else if (line[0] == 'F' && line[1] == ' ')
-			dat->f = line;
+			dat->f = ft_strdup(line);
 		else if (line[0] == 'C' && line[1] == ' ')
-			dat->c = line;
+			dat->c = ft_strdup(line);
 		else break;
 		dat->nomaplines++;
+		free(line);
 	}
 	free(line);
 }
@@ -51,9 +52,14 @@ static int	ft_contarfilas(int fdmap)
 
 	line = NULL;
 	i = 0;
-	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1));
+	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
+		free(line);
+	free(line);
 	while((getnextline(&line, fdmap)) > 0)
+	{
 		i++;
+		free(line);
+	}
 	i = i + 2;
 	free(line);
 	return (i);
@@ -71,9 +77,11 @@ void	ft_savemap(t_datos *dat, int fdmap)
 	while (cont < dat->nomaplines)
 	{
 		getnextline(&line, fdmap);
+		free(line);
 		cont++;
 	}
-	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1));
+	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
+		free(line);
 	getnextline(&dat->mapa[i], fdmap);
 	i++;
 	while (i < dat->filmap)

@@ -7,7 +7,8 @@ SRCS		= srcs/genmap.c\
 			srcs/errors.c\
 			srcs/errors1.c\
 			srcs/errors2.c\
-			srcs/finalizer.c
+			srcs/finalizer.c\
+			srcs/supportft.c
 
 OBJS		= $(SRCS:.c=.o)
 

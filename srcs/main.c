@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:52 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/26 11:15:20 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/10/29 13:21:11 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int args, char **argv)
 	ft_genmap(argv[1], dat);
 	dat->mapname = argv[1];
 	ft_errors(dat);
-	//ft_frees(dat);
+	ft_frees(dat);
+	system("leaks cub3D");
 	return(0);
 }

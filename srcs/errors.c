@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/20 13:49:42 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/10/29 13:14:30 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	ft_errorsmap(t_datos *dat)
 		i++;
 	}
 	mapa[i] = NULL;
+	ft_charsmap(mapa);
 	ft_valmap(mapa, dat);
+	ft_freematrix(mapa);
 }
 
 void	ft_errorsconfig(t_datos *dat)
