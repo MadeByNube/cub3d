@@ -13,36 +13,14 @@ void ft_initializedat(t_datos *dat)
 	dat->f = NULL;
 	dat->c = NULL;
 	dat->mapname = NULL;
-}
-
-void	ft_saveconfig(int fdmap, t_datos *dat)
-{
-	char *line;
-	int comp;
-
-	while((comp = getnextline(&line, fdmap)) > 0)
-	{
-		if (line[0] == 'R' && line[1] == ' ')
-			dat->r = ft_strdup(line);
-		else if (line[0] == 'N' && line[1] == 'O')
-			dat->no = ft_strdup(line);
-		else if (line[0] == 'S' && line[1] == 'O')
-			dat->so = ft_strdup(line);
-		else if (line[0] == 'W' && line[1] == 'E')
-			dat->we = ft_strdup(line);
-		else if (line[0] == 'E' && line[1] == 'A')
-			dat->ea = ft_strdup(line);
-		else if (line[0] == 'S' && line[1] == ' ')
-			dat->s = ft_strdup(line);
-		else if (line[0] == 'F' && line[1] == ' ')
-			dat->f = ft_strdup(line);
-		else if (line[0] == 'C' && line[1] == ' ')
-			dat->c = ft_strdup(line);
-		else break;
-		dat->nomaplines++;
-		free(line);
-	}
-	free(line);
+	dat->r = 0;
+	dat->no = 0;
+	dat->so = 0;
+	dat->we = 0;
+	dat->ea = 0;
+	dat->s = 0;
+	dat->f = 0;
+	dat->c = 0;
 }
 
 static int	ft_contarfilas(int fdmap)
@@ -98,7 +76,11 @@ void		ft_genmap(char *archivo, t_datos *dat)
 	int fdmap;
 
 	ft_initializedat(dat);
-	fdmap = open(archivo, O_RDONLY);
+	if (!(fdmap = open(archivo, O_RDONLY)))
+	{
+		perror("Error: No se ha podido leer el archivo");
+		exit(9);
+	}
 	ft_saveconfig(fdmap, dat);
 	dat->filmap = ft_contarfilas(fdmap);
 	close(fdmap);

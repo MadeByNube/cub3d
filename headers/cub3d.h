@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/29 10:54:27 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/10/30 14:29:13 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,16 @@ typedef struct	s_datos
 	char **mapa;
 	int filmap;
 	int nomaplines;
+	int rflag;
+	int noflag;
+	int soflag;
+	int weflag;
+	int eaflag;
+	int sflag;
+	int fflag;
+	int cflag;
 }				t_datos;
+
 
 char		*ft_strjoingnl(char *str1, char car);
 
@@ -41,7 +50,11 @@ void		ft_genmap(char *mapa, t_datos *dat);
 
 void		ft_erroresgeneral(t_datos *dat);
 void		ft_errorextmap(t_datos *dat);
+void		ft_errorargs(void);
 void		ft_errorfoc(char *f);
+void		ft_focnumerico(char **aux2);
+void		ft_rnumerico(char **aux);
+void		ft_focmaximo(char **aux2);
 void		ft_errortexture(char *texture);
 void		ft_errorerre(char *r);
 void		ft_errors(t_datos *dat);
@@ -49,8 +62,8 @@ void		ft_errorsmap(t_datos *dat);
 void		ft_valmap(char **mapa, t_datos *dat);
 void		ft_valmap2(char **mapa, int x, int y, t_datos *dat);
 
-void	ft_frees(t_datos *dat);
-void    ft_freematrix(char **matrix);
-void	ft_charsmap(char **mapa);
+void		ft_frees(t_datos *dat);
+void		ft_freematrix(char **matrix);
+void		ft_charsmap(char **mapa);
 
 #endif
