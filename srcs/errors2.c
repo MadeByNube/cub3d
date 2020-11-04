@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/30 13:38:29 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:19:09 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_valmap(char **mapa, t_datos *dat)
 
 void	ft_valmap2(char **mapa, int x, int y, t_datos *dat)
 {
-	if (x == 0 || y == 0 || y == ft_strlen(mapa[x]) || x == dat->filmap - 1 ||
+	if (x == 0 || y == 0 || y == (ft_strlen(mapa[x]) - 1) || x == dat->filmap - 1 ||
 		y > ft_strlen(mapa[x + 1]) || y > ft_strlen(mapa[x - 1]))
 	{
 		perror("Error: mapa abierto");
@@ -75,13 +75,14 @@ void	ft_valmap2(char **mapa, int x, int y, t_datos *dat)
 	mapa[x][y] = '3';
 	if (mapa[x][y + 1] == '0' || mapa[x][y + 1] == '2' || mapa[x][y + 1] == ' ')
 		ft_valmap2(mapa, x, y + 1, dat);
-	if (mapa[x][y - 1] == '0' || mapa[x][y - 1] == '2' || mapa[x][y + 1] == ' ')
+	if (mapa[x][y - 1] == '0' || mapa[x][y - 1] == '2' || mapa[x][y - 1] == ' ')
 		ft_valmap2(mapa, x, y - 1, dat);
-	if (mapa[x + 1][y] == '0' || mapa[x + 1][y] == '2' || mapa[x][y + 1] == ' ')
+	if (mapa[x + 1][y] == '0' || mapa[x + 1][y] == '2' || mapa[x + 1][y] == ' ')
 		ft_valmap2(mapa, x + 1, y, dat);
-	if (mapa[x - 1][y] == '0' || mapa[x - 1][y] == '2' || mapa[x][y + 1] == ' ')
+	if (mapa[x - 1][y] == '0' || mapa[x - 1][y] == '2' || mapa[x - 1][y] == ' ')
 		ft_valmap2(mapa, x - 1, y, dat);
 }
+
 void	ft_focnumerico(char **aux2)
 {
 	int		x;

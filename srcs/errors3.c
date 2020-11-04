@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/30 14:27:59 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:50:39 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 		else if (line[0] == 'N' && line[1] == 'O')
 			ft_saveorerror_no(dat, line);
 		else if (line[0] == 'S' && line[1] == 'O')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_so(dat, line);
 		else if (line[0] == 'W' && line[1] == 'E')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_we(dat, line);
 		else if (line[0] == 'E' && line[1] == 'A')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_ea(dat, line);
 		else if (line[0] == 'S' && line[1] == ' ')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_s(dat, line);
 		else if (line[0] == 'F' && line[1] == ' ')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_f(dat, line);
 		else if (line[0] == 'C' && line[1] == ' ')
-			ft_saveorerror_no(dat, line);
+			ft_saveorerror_c(dat, line);
 		else if (line[0] == '\n');
 		else break;
 		dat->nomaplines++;

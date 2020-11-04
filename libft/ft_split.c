@@ -6,69 +6,71 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:40:44 by cnavarro          #+#    #+#             */
-/*   Updated: 2019/11/21 12:23:06 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/04 12:42:02 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
 
-static void		odionorminette(char **aux, int *ini, int *seeking, int *i)
+static	int		ft_contar(char const *s, char c)
 {
-	aux[0] = NULL;
-	*ini = 0;
-	*seeking = 1;
-	*i = 0;
-}
+	int			wlen;
+	size_t		w;
 
-static char		*ft_strndup(const char *str1, int n, char c)
-{
-	char	*aux;
-	int		i1;
-	int		i2;
-
-	i1 = 0;
-	if (str1[n + 1] == '\0' && str1[n] != c)
-		n++;
-	while (str1[i1] != '\0')
-		i1++;
-	aux = malloc(i1 + 1);
-	i2 = 0;
-	while (i2 < i1 && i2 < n)
+	wlen = 0;
+	w = 0;
+	while (*s)
 	{
-		aux[i2] = str1[i2];
-		i2++;
+		if (!wlen && *s != c)
+			w++;
+		wlen = (*s == c) ? 0 : 1;
+		s++;
 	}
-	aux[i2] = '\0';
-	return (aux);
+	return (w);
 }
 
-char			**ft_split(char const *s, char c)
+static	int		ft_lenword(char const *s, char c)
 {
 	int		i;
-	char	**aux;
-	char	*ptr;
-	int		ini;
-	int		seeking;
+	int		len;
 
-	aux = malloc(sizeof(char *));
-	if (aux == NULL || s == NULL)
-		return (NULL);
-	odionorminette(aux, &ini, &seeking, &i);
-	while (s[i++] != '\0')
+	i = 0;
+	len = 0;
+	while (s[i] == c)
+		i++;
+	while (s[i] != c && s[i] != '\0')
 	{
-		if (seeking && s[i - 1] != c)
-		{
-			ini = i - 1;
-			seeking = 0;
-		}
-		else if (seeking == 0 && (s[i - 1] == c || s[i] == '\0'))
-		{
-			seeking = 1;
-			ptr = ft_strndup(&s[ini], i - ini - 1, c);
-			aux = ft_insert_string(aux, ptr);
-		}
+		i++;
+		len++;
 	}
-	return (aux);
+	return (len);
+}
+
+char			**ft_split(const char *s, char c)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	**str;
+
+	if (!s || !(str = (char**)malloc(sizeof(*str) * (ft_contar(s, c) + 1))))
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (++i < ft_contar(s, c))
+	{
+		k = 0;
+		if (!(str[i] = ft_calloc(ft_lenword(&s[j], c) + 1, 1)))
+			str[i] = NULL;
+		while (s[j] == c)
+			j++;
+		while (s[j] != c && s[j])
+			str[i][k++] = s[j++];
+		str[i][k] = '\0';
+	}
+	str[i] = 0;
+	return (str);
 }
