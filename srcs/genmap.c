@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 12:07:44 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 13:44:26 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,17 @@ void	ft_savemap(t_datos *dat, int fdmap)
 	cont = 0;
 	i = 0;
 	line = NULL;
-	while (cont < dat->nomaplines)
+	while (cont++ < dat->nomaplines)
 	{
 		getnextline(&line, fdmap);
 		free(line);
-		cont++;
 	}
 	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
 		free(line);
 	getnextline(&dat->mapa[i], fdmap);
 	i++;
-	while (i < dat->filmap)
-	{
+	while (i++ < dat->filmap)
 		getnextline(&dat->mapa[i], fdmap);
-		i++;
-	}
 	dat->mapa[i] = NULL;
 	free(line);
 }

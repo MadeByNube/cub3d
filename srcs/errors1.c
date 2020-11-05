@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 12:33:53 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 13:53:24 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_errortexture(char *texture)
 			perror("Error\nTextura no valida");
 			exit(3);
 		}
-	if (!(fd = open(texture, O_RDONLY)))
+	if (!((fd = open(texture, O_RDONLY) > 0)))
 	{
 		perror("Error\nNo se ha podido abrir la textura");
 		exit(11);
