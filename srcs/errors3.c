@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 12:54:31 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:59:36 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 	int comp;
 	int i;
 
-	i = 0;
 	while((comp = getnextline(&line, fdmap)) > 0)
 	{
+		i = 0;
 		while (line[i] == ' ')
 			i++;
 		if (line[i] == 'R' && line[i + 1] == ' ')
