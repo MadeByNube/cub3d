@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/04 12:42:55 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:33:53 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_charsmap(char **mapa)
 			if (!(mapa[x][y] == '0' || mapa[x][y] == '1' || mapa[x][y] == '2' || mapa[x][y] == ' '
 				|| mapa[x][y] == 'S' || mapa[x][y] == 'W' || mapa[x][y] == 'E' || mapa[x][y] == 'N'))
 			{
-				perror("Error: Caracteres en mapa no validos");
+				perror("Error\nCaracteres en mapa no validos");
 				exit(1);
 			}
 			y++;
@@ -46,6 +46,7 @@ void	ft_errorfoc(char *f)
 	char 	**aux1;
 	char 	**aux2;
 
+	ft_quitaespacios2000(f);
 	aux1 = ft_split(f, ' ');
 	aux2 = ft_split(aux1[1], ',');
 	ft_freematrix(aux1);
@@ -64,12 +65,12 @@ void	ft_errortexture(char *texture)
 	if (!(texture[i-4]) || (texture[i-3]) != '.' || (texture[i-2]) != 'x' || 
 		(texture[i-1]) != 'p' || (texture[i]) != 'm')
 		{
-			perror("Textura no válida");
+			perror("Error\nTextura no valida");
 			exit(3);
 		}
 	if (!(fd = open(texture, O_RDONLY)))
 	{
-		perror("Error: No se ha podido abrir la textura");
+		perror("Error\nNo se ha podido abrir la textura");
 		exit(11);
 	}
 	close(fd);
@@ -88,7 +89,7 @@ void	ft_errorerre(char *r)
 		x++;
 	if (x != 3)
 	{
-		perror("Error: Argumentos en R incorrectos");
+		perror("Error\nArgumentos en R incorrectos");
 		exit(4);
 	}
 	ft_rnumerico(aux);

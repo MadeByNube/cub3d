@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/04 11:50:39 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:54:31 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_rnumerico(char **aux)
 		{
 			if (!ft_isdigit(aux[x][y]))
 			{
-				perror("Error: Argumento de R no es numérico");
+				perror("Error\nArgumento de R no es numerico");
 				exit(EXIT_FAILURE);
 			}
 			y++;
@@ -39,29 +39,62 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 {
 	char *line;
 	int comp;
+	int i;
 
+	i = 0;
 	while((comp = getnextline(&line, fdmap)) > 0)
 	{
-		if (line[0] == 'R' && line[1] == ' ')
+		while (line[i] == ' ')
+			i++;
+		if (line[i] == 'R' && line[i + 1] == ' ')
 			ft_saveorerror_r(dat, line);
-		else if (line[0] == 'N' && line[1] == 'O')
+		else if (line[i] == 'N' && line[i + 1] == 'O')
 			ft_saveorerror_no(dat, line);
-		else if (line[0] == 'S' && line[1] == 'O')
+		else if (line[i] == 'S' && line[i + 1] == 'O')
 			ft_saveorerror_so(dat, line);
-		else if (line[0] == 'W' && line[1] == 'E')
+		else if (line[i] == 'W' && line[i + 1] == 'E')
 			ft_saveorerror_we(dat, line);
-		else if (line[0] == 'E' && line[1] == 'A')
+		else if (line[i] == 'E' && line[i + 1] == 'A')
 			ft_saveorerror_ea(dat, line);
-		else if (line[0] == 'S' && line[1] == ' ')
+		else if (line[i] == 'S' && line[i + 1] == ' ')
 			ft_saveorerror_s(dat, line);
-		else if (line[0] == 'F' && line[1] == ' ')
+		else if (line[i] == 'F' && line[i + 1] == ' ')
 			ft_saveorerror_f(dat, line);
-		else if (line[0] == 'C' && line[1] == ' ')
+		else if (line[i] == 'C' && line[i + 1] == ' ')
 			ft_saveorerror_c(dat, line);
-		else if (line[0] == '\n');
+		else if (line[i] == '\n');
 		else break;
 		dat->nomaplines++;
 		free(line);
 	}
 	free(line);
+}
+
+void	ft_correctconfig(t_datos *dat)
+{
+	if (!dat->r || !dat->no || !dat->so || !dat->we || !dat->ea || !dat->s || !dat->f || !dat->c)
+	{
+		perror("Error\nConfiguracion incompleta");
+	}
+}
+void	ft_quitaespacios2000(char *f)
+{
+	int i;
+	int pos;
+	char *aux;
+
+	aux = malloc(sizeof(char *) * ft_strlen(f));
+	pos = 0;
+	i = 0;
+	while (f[pos] == ' ')
+		pos++;
+	aux[i++] = f[pos++];
+	aux[i++] = f[pos++];
+	while (f[pos])
+	{
+		if (f[pos] == ' ')
+			pos++;
+		else
+			aux[i++] = f[pos++];
+	}
 }

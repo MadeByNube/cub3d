@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/04 12:42:28 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:53:24 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void		ft_errorerre(char *r);
 void		ft_errors(t_datos *dat);
 void		ft_errorsmap(t_datos *dat);
 void		ft_saveconfig(int fdmap, t_datos *dat);
+void		ft_correctconfig(t_datos *dat);
+void		ft_quitaespacios2000(char *f);
 
 void    	ft_saveorerror_r(t_datos *dat, char *line);
 void		ft_saveorerror_no(t_datos *dat, char *line);

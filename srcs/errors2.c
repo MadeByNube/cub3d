@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/04 13:19:09 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:16:21 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_errorextmap(t_datos *dat)
 	if (!(aux[i - 4]) || (aux[i - 3]) != '.' || (aux[i - 2]) != 'c' ||
 		(aux[i - 1]) != 'u' || (aux[i]) != 'b')
 		{
-			perror("Textura no válida");
+			perror("Error\nTextura no valida");
 			exit(5);
 		}
 	free(aux);
@@ -58,7 +58,7 @@ void	ft_valmap(char **mapa, t_datos *dat)
 	}
 	if (cont != 1)
 	{
-		perror("Error: Hay 0 o mas de 1 posicion de jugador");
+		perror("Error\nHay 0 o mas de 1 posicion de jugador");
 		exit(6);
 	}
 	ft_valmap2(mapa, x, y, dat);
@@ -69,7 +69,7 @@ void	ft_valmap2(char **mapa, int x, int y, t_datos *dat)
 	if (x == 0 || y == 0 || y == (ft_strlen(mapa[x]) - 1) || x == dat->filmap - 1 ||
 		y > ft_strlen(mapa[x + 1]) || y > ft_strlen(mapa[x - 1]))
 	{
-		perror("Error: mapa abierto");
+		perror("Error\nMapa abierto");
 		exit(7);
 	}
 	mapa[x][y] = '3';
@@ -96,7 +96,7 @@ void	ft_focnumerico(char **aux2)
 		{
 			if (!ft_isdigit(aux2[x][y]))
 			{
-				perror("Error: Valores no numericos");
+				perror("Error\nValores no numericos");
 				exit(2);
 			}
 			y++;
@@ -106,7 +106,7 @@ void	ft_focnumerico(char **aux2)
 	}
 	if (x != 3)
 	{
-		perror("Error: Color debe tener 3 valores");
+		perror("Error\nColor debe tener 3 valores");
 		exit(10);
 	}
 }
@@ -119,7 +119,7 @@ void	ft_focmaximo(char **aux2)
 	{
 		if (ft_atoi(aux2[x]) < 0 || ft_atoi(aux2[x]) > 255)
 		{
-			perror("Error: color incorrecto");
+			perror("Error\nColor incorrecto");
 		}
 		x++;
 	}

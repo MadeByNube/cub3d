@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   genmap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
+/*   Updated: 2020/11/05 12:07:44 by cnavarro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/cub3d.h"
 
 void ft_initializedat(t_datos *dat)
@@ -78,10 +90,11 @@ void		ft_genmap(char *archivo, t_datos *dat)
 	ft_initializedat(dat);
 	if (!(fdmap = open(archivo, O_RDONLY)))
 	{
-		perror("Error: No se ha podido leer el archivo");
+		perror("Error\nNo se ha podido leer el archivo");
 		exit(9);
 	}
 	ft_saveconfig(fdmap, dat);
+	ft_correctconfig(dat);
 	dat->filmap = ft_contarfilas(fdmap);
 	close(fdmap);
 	fdmap = open(archivo, O_RDONLY);

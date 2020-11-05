@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/30 11:24:04 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/05 12:17:18 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	ft_errors(t_datos *dat)
 
 void	ft_errorargs(void)
 {
-	perror("Numero de argumentos inválidos");
+	perror("Error\nNumero de argumentos invalidos");
 	exit(8);
 }
