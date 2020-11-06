@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 12:59:36 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/06 13:40:55 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_rnumerico(char **aux)
 			if (!ft_isdigit(aux[x][y]))
 			{
 				perror("Error\nArgumento de R no es numerico");
-				exit(EXIT_FAILURE);
+				exit(14);
 			}
 			y++;
 		}
@@ -75,6 +75,7 @@ void	ft_correctconfig(t_datos *dat)
 	if (!dat->r || !dat->no || !dat->so || !dat->we || !dat->ea || !dat->s || !dat->f || !dat->c)
 	{
 		perror("Error\nConfiguracion incompleta");
+		exit(13);
 	}
 }
 void	ft_quitaespacios2000(char *f)
@@ -97,4 +98,23 @@ void	ft_quitaespacios2000(char *f)
 		else
 			aux[i++] = f[pos++];
 	}
+	free(aux);
+}
+
+char	*ft_convtexture(char *texture)
+{
+	int i;
+	int j;
+	char *aux;
+
+	aux = malloc(sizeof(char *) * ft_strlen(texture));
+	i = 0;
+	j = 0;
+
+	while (texture[i] != '.' && texture[i + 1] != '/')
+		i++;
+	while (texture[i])
+		aux[j++] = texture[i++];
+	aux[j] = '\0';
+	return (aux);
 }

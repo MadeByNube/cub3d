@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 13:44:26 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/06 12:04:48 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void ft_initializedat(t_datos *dat)
 	dat->s = 0;
 	dat->f = 0;
 	dat->c = 0;
+	dat->rflag = 0;
+	dat->noflag = 0;
+	dat->soflag = 0;
+	dat->weflag = 0;
+	dat->eaflag = 0;
+	dat->sflag = 0;
+	dat->fflag = 0;
+	dat->cflag = 0;
+	dat->nomaplines = 0;
 }
 
 static int	ft_contarfilas(int fdmap)
@@ -73,8 +82,11 @@ void	ft_savemap(t_datos *dat, int fdmap)
 		free(line);
 	getnextline(&dat->mapa[i], fdmap);
 	i++;
-	while (i++ < dat->filmap)
+	while (i < dat->filmap)
+	{
 		getnextline(&dat->mapa[i], fdmap);
+		i++;
+	}
 	dat->mapa[i] = NULL;
 	free(line);
 }

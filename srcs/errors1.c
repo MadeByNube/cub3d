@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 13:53:24 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/06 13:41:04 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,23 @@ void	ft_errortexture(char *texture)
 {
 	int i;
 	int fd;
+	char *aux;
 
 	i = ft_strlen(texture);
 	i--;
-	if (!(texture[i-4]) || (texture[i-3]) != '.' || (texture[i-2]) != 'x' || 
-		(texture[i-1]) != 'p' || (texture[i]) != 'm')
+	if (!(texture[i - 4]) || (texture[i - 3]) != '.' || (texture[i - 2]) != 'x' || 
+		(texture[i - 1]) != 'p' || (texture[i]) != 'm')
 		{
 			perror("Error\nTextura no valida");
 			exit(3);
 		}
-	if (!((fd = open(texture, O_RDONLY) > 0)))
+	aux = ft_convtexture(texture);
+	if (!((fd = open(aux, O_RDONLY) > 0)))
 	{
 		perror("Error\nNo se ha podido abrir la textura");
 		exit(11);
 	}
-	close(fd);
+	free(aux);
 }
 
 void	ft_errorerre(char *r)
