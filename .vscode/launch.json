@@ -10,10 +10,10 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cub3D",
-            "args": ["mapas/map1.cub", "--save"],
+            "args": ["maps/validos/valid_lotspacesmap.cub", "--save"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
+            "environment": [],  
             "externalConsole": false,
             "MIMode": "lldb"
         }

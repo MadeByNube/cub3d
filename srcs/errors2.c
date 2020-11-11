@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/05 12:16:21 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/11 14:17:46 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_errorextmap(t_datos *dat)
 	if (!(aux[i - 4]) || (aux[i - 3]) != '.' || (aux[i - 2]) != 'c' ||
 		(aux[i - 1]) != 'u' || (aux[i]) != 'b')
 		{
-			perror("Error\nTextura no valida");
+			perror("Error\nExtension de mapa invalida");
 			exit(5);
 		}
 	free(aux);
@@ -96,7 +96,7 @@ void	ft_focnumerico(char **aux2)
 		{
 			if (!ft_isdigit(aux2[x][y]))
 			{
-				perror("Error\nValores no numericos");
+				perror("Error\nF o C con Valores no numericos o negativos");
 				exit(2);
 			}
 			y++;

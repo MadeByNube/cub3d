@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/06 12:04:48 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/11 13:27:07 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void ft_initializedat(t_datos *dat)
 	dat->fflag = 0;
 	dat->cflag = 0;
 	dat->nomaplines = 0;
+	dat->initmaplane = NULL;
 }
 
 static int	ft_contarfilas(int fdmap)
@@ -50,7 +51,7 @@ static int	ft_contarfilas(int fdmap)
 	char *line;
 
 	line = NULL;
-	i = 0;
+	i = 1;
 	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
 		free(line);
 	free(line);
@@ -78,9 +79,9 @@ void	ft_savemap(t_datos *dat, int fdmap)
 		getnextline(&line, fdmap);
 		free(line);
 	}
-	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
+	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 0))
 		free(line);
-	getnextline(&dat->mapa[i], fdmap);
+	dat->mapa[i] = ft_strdup(line);
 	i++;
 	while (i < dat->filmap)
 	{

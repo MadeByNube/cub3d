@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/06 11:22:36 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/11 13:24:09 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../libft/libft.h"
 typedef struct	s_datos
 {
+	char *initmaplane;
 	char *mapname;
 	char *r;
 	char *no;
@@ -48,6 +49,7 @@ char		*ft_strjoingnl(char *str1, char car);
 int			getnextline(char **line, int fdmap);
 void		ft_genmap(char *mapa, t_datos *dat);
 
+void		ft_args(int args, char **argv);
 void		ft_erroresgeneral(t_datos *dat);
 void		ft_errorextmap(t_datos *dat);
 void		ft_errorargs(void);

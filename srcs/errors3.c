@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/06 13:40:55 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/11 14:16:40 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_rnumerico(char **aux)
 		{
 			if (!ft_isdigit(aux[x][y]))
 			{
-				perror("Error\nArgumento de R no es numerico");
+				perror("Error\nArgumento de R no es numerico o es negativo");
 				exit(14);
 			}
 			y++;
@@ -62,11 +62,12 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 			ft_saveorerror_f(dat, line);
 		else if (line[i] == 'C' && line[i + 1] == ' ')
 			ft_saveorerror_c(dat, line);
-		else if (line[i] == '\n');
+		else if (!(line[i]));
 		else break;
 		dat->nomaplines++;
 		free(line);
 	}
+	dat->initmaplane = ft_strdup(line);
 	free(line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 11:07:17 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/10/29 13:03:56 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/11 13:25:15 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ void	ft_frees(t_datos *dat)
 		free(dat->f);
 	if (dat->c)
 		free(dat->c);
+	if (dat->initmaplane)
+		free(dat->initmaplane);
 }
