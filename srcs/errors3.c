@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 14:16:40 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/12 10:32:58 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ void	ft_rnumerico(char **aux)
 			y++;
 		}
 		y = 0;
+		x++;
+	}
+	x = 1;
+	while (aux[x])
+	{
+		if (ft_atoi(aux[x]) == 0)
+			{
+				perror("Error\nResolucion invalida");
+				exit(15);
+			}
 		x++;
 	}
 }
