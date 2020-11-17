@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 13:24:09 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/17 12:26:44 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_datos
 	int sflag;
 	int fflag;
 	int cflag;
+	int **mapint;
 }				t_datos;
 
 
@@ -82,4 +83,10 @@ void		ft_valmap2(char **mapa, int x, int y, t_datos *dat);
 void		ft_frees(t_datos *dat);
 void		ft_freematrix(char **matrix);
 void		ft_charsmap(char **mapa);
+
+
+void		ft_raycasting(t_datos *dat);
+void		ft_preraycasting(t_datos *dat);
+void		ft_intmap(t_datos *dat);
+
 #endif

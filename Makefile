@@ -11,7 +11,9 @@ SRCS		= srcs/genmap.c\
 			srcs/finalizer.c\
 			srcs/supportft.c\
 			srcs/saveconfigerror.c\
-			srcs/saveconfigerror2.c
+			srcs/saveconfigerror2.c\
+			srcs/raycasting.c\
+			srcs/preraycasting.c
 
 OBJS		= $(SRCS:.c=.o)
 
