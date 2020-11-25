@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/17 12:26:44 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:34:49 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <mlx.h>
 # include "../libft/libft.h"
 typedef struct	s_datos
 {
@@ -42,6 +43,15 @@ typedef struct	s_datos
 	int fflag;
 	int cflag;
 	int **mapint;
+	void *mlx_ptr;
+	void *win_ptr;
+	void *img;
+	char *dir;
+	int r1;
+	int r2;
+	int line_length;
+	int bits_per_pixel;
+	int endian;
 }				t_datos;
 
 
@@ -88,5 +98,8 @@ void		ft_charsmap(char **mapa);
 void		ft_raycasting(t_datos *dat);
 void		ft_preraycasting(t_datos *dat);
 void		ft_intmap(t_datos *dat);
+void		ft_configadd(t_datos *dat);
+void		ft_floor_and_sky(t_datos *dat);
+void		ft_openwindow(t_datos *dat);
 
 #endif

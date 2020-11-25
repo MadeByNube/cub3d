@@ -37,8 +37,6 @@ $(NAME):	$(OBJS)
 				@echo "\033[1;32m[* * * * * * * * * * * * * * * * * * * * * * *]"
 				@echo "\033[1;32m[ C O M P I L E D        S U C C E S F U L L Y]"
 				@echo "\033[1;32m[* * * * * * * * * * * * * * * * * * * * * * *]"
-%.o: %.c
-	$(GCC) $(FLAGS) $(INCLUDE) -c $< -o $(<:.c=.o)
 fclean: clean
 	rm -f $(NAME)
 clean:

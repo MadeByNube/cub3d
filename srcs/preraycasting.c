@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/17 13:14:39 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:16:18 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_preraycasting(t_datos *dat)
 {
 	ft_intmap(dat);
+	ft_configadd(dat);
 }
 
 void	ft_intmap(t_datos *dat)
@@ -39,7 +40,7 @@ void	ft_intmap(t_datos *dat)
 		x++;
 	}
 	// imprimir mapa solo comprobación
-	x = 0;
+	/*x = 0;
 	y = 0;
 	while (dat->mapint[x])
 	{
@@ -51,5 +52,17 @@ void	ft_intmap(t_datos *dat)
 		printf("\n");
 		x++;
 		y = 0;
-	}
+	}*/
+}
+
+void	ft_configadd(t_datos *dat)
+{
+	char **aux;
+	aux = ft_split(dat->r, ' ');
+	dat->r1 = ft_atoi(aux[1]);
+	dat->r2 = ft_atoi(aux[2]);
+	dat->bits_per_pixel = 4;
+	dat->endian = 0;
+	dat->line_length = dat->r1;
+	free(aux);
 }

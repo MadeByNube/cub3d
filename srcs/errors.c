@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 10:43:28 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:02:20 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	ft_args(int args, char **argv)
 {
 	if (!(args == 3 || args == 2))
 		ft_errorargs();
-	if ((ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) != 0))
+	if (args == 3 && (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) != 0))
 		ft_errorargs();
 }
