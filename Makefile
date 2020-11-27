@@ -13,7 +13,8 @@ SRCS		= srcs/genmap.c\
 			srcs/saveconfigerror.c\
 			srcs/saveconfigerror2.c\
 			srcs/raycasting.c\
-			srcs/preraycasting.c
+			srcs/preraycasting.c\
+			srcs/raycasting2.c
 
 OBJS		= $(SRCS:.c=.o)
 
