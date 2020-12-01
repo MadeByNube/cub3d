@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/27 13:46:33 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/01 13:38:57 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,8 @@ typedef struct	s_datos
 	int line_length;
 	int bits_per_pixel;
 	int endian;
+	int posx;
+	int posy;
 }				t_datos;
 
 
@@ -220,9 +222,9 @@ void		ft_intmap(t_datos *dat);
 void		ft_configadd(t_datos *dat);
 void		ft_floor_and_sky(t_datos *dat);
 void		ft_openwindow(t_datos *dat);
-void		ft_imagen(t_datos *dat);
 void		ft_mlx_pixel_put(t_datos *dat, int x, int y, int color);
 int			ft_color(char *cadena);
 int			key_hook(int keycode, t_datos *dat);
-void		ft_player(t_datos *dat, int posx, int posy, int tam);
+void		ft_player(t_datos *dat, int tam);
+int			ft_inside(t_datos *dat);
 #endif

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/27 12:28:34 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/01 13:52:42 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	ft_configadd(t_datos *dat)
 	aux = ft_split(dat->r, ' ');
 	dat->r1 = ft_atoi(aux[1]);
 	dat->r2 = ft_atoi(aux[2]);
-	dat->bits_per_pixel = 4;
-	dat->endian = 0;
-	dat->line_length = dat->r1;
+	dat->posx = 450;
+	dat->posy = 250;
 	free(aux);
 }

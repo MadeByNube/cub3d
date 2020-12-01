@@ -14,7 +14,8 @@ SRCS		= srcs/genmap.c\
 			srcs/saveconfigerror2.c\
 			srcs/raycasting.c\
 			srcs/preraycasting.c\
-			srcs/raycasting2.c
+			srcs/raycasting2.c\
+			srcs/inside.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -34,7 +35,7 @@ $(NAME):	$(OBJS)
 				@echo "\033[0;36m[Libft compilation...]"
 			$(MAKE) -C libft
 				@echo "\033[0;33m[cub3D compilation...]"
-			$(GCC) $(LIBFT) $(OBJS) -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(GCC) $(LIBFT) $(OBJS) -L $(MLX_DIR) $(FLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 				@echo "\033[1;32m[* * * * * * * * * * * * * * * * * * * * * * *]"
 				@echo "\033[1;32m[ C O M P I L E D        S U C C E S F U L L Y]"
 				@echo "\033[1;32m[* * * * * * * * * * * * * * * * * * * * * * *]"

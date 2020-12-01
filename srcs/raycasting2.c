@@ -6,27 +6,27 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:48:29 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/27 13:56:31 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/01 14:35:00 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void	ft_player(t_datos *dat, int posx, int posy, int tam)
+void	ft_player(t_datos *dat, int tam)
 {
 	int x;
 	int y;
 
-	x = posx;
-	y = posy;
-	while (y <= posy + tam)
+	x = dat->posx;
+	y = dat->posy;
+	while (y <= dat->posy + tam)
 	{
-		while (x <= posx + tam)
+		while (x <= dat->posx + tam)
 		{
 			ft_mlx_pixel_put(dat, x, y, 0x00FF00);
 			x++;
 		}
-		x = posx;
+		x = dat->posx;
 		y++;
 	}
 }
@@ -46,13 +46,19 @@ int		ft_color(char *cadena)
 int		key_hook(int keycode, t_datos *dat)
 {
 	if (keycode == KEY_A)
-		printf("Iquierda\n");
+		dat->posx -= 10;
 	else if (keycode == KEY_D)
-		printf("Derecha\n");
+		dat->posx += 10;
 	else if (keycode == KEY_W)
-		printf("Arriba\n");
+		dat->posy -= 10;
 	else if (keycode == KEY_S)
-		printf("Abajo\n");
+		dat->posy += 10;
+	else if (keycode == KEY_ESCAPE)
+	{
+		//mlx_destroy_window(dat->mlx_ptr, dat->win_ptr); Da segmentation fault
+		exit(16);
+	}
 	else
 		printf("Otra\n");
+	return (0);
 }
