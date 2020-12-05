@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/12 10:32:58 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:23:53 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_quitaespacios2000(char *f)
 	int pos;
 	char *aux;
 
-	aux = malloc(sizeof(char *) * ft_strlen(f));
+	aux = ft_calloc(sizeof(char *) * ft_strlen(f), 1);
 	pos = 0;
 	i = 0;
 	while (f[pos] == ' ')
@@ -118,7 +118,7 @@ char	*ft_convtexture(char *texture)
 	int j;
 	char *aux;
 
-	aux = malloc(sizeof(char *) * ft_strlen(texture));
+	aux = ft_calloc(sizeof(char *) * ft_strlen(texture), 1);
 	i = 0;
 	j = 0;
 

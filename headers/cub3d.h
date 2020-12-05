@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/01 13:38:57 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:25:21 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
+# define movespeed			0.3
+# define rotspeed			0.0872665
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -138,8 +140,41 @@
 # include <stdio.h>
 # include <mlx.h>
 # include "../libft/libft.h"
+# include <math.h>
+typedef struct	t_raycast
+{
+	double plposx;
+	double plposy;
+	double dirx;
+	double diry;
+	double planex;
+	double planey;
+	double time;
+	double oldtime;
+	double camx;
+	double raydirx;
+	double raydiry;
+	int mapx;
+	int mapy;
+	int stepx;
+	int stepy;
+	double sidedistx;
+	double sidedisty;
+	double deltadistx;
+	double deltadisty;
+	int hit;
+	int side;
+	double perpwalldist;
+	int lineheight;
+	int drawstart;
+	int drawend;
+	double olddirx;
+	double oldplanex;
+}				t_raycast;
+
 typedef struct	s_datos
 {
+
 	char *initmaplane;
 	char *mapname;
 	char *r;
@@ -173,8 +208,13 @@ typedef struct	s_datos
 	int endian;
 	int posx;
 	int posy;
+	void *texture;
+	int text_width;
+	int text_height;
+	char *text_img;
+	char cardinal;
+	t_raycast	*rct;
 }				t_datos;
-
 
 char		*ft_strjoingnl(char *str1, char car);
 
@@ -221,10 +261,13 @@ void		ft_preraycasting(t_datos *dat);
 void		ft_intmap(t_datos *dat);
 void		ft_configadd(t_datos *dat);
 void		ft_floor_and_sky(t_datos *dat);
-void		ft_openwindow(t_datos *dat);
 void		ft_mlx_pixel_put(t_datos *dat, int x, int y, int color);
 int			ft_color(char *cadena);
 int			key_hook(int keycode, t_datos *dat);
-void		ft_player(t_datos *dat, int tam);
-int			ft_inside(t_datos *dat);
+int			ft_main_loop(t_datos *dat);
+void		ft_texturas(t_datos *dat);
+void		ft_rays(t_datos *dat);
+void		ft_dirpos(t_datos *dat);
+void		ft_prerays(t_datos *dat);
+void		ft_verline(int x, t_datos *dat);
 #endif

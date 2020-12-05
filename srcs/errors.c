@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/23 12:02:20 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:23:43 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_errorsmap(t_datos *dat)
 	int i;
 
 	i = 0;
-	mapa = malloc(sizeof(char **) * (dat->filmap + 1));
+	mapa = ft_calloc(sizeof(char **) * (dat->filmap + 1), 1);
 	while (dat->mapa[i])
 	{
 		mapa[i] = ft_strdup(dat->mapa[i]);

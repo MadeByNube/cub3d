@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 13:27:07 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:21:25 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void		ft_genmap(char *archivo, t_datos *dat)
 	dat->filmap = ft_contarfilas(fdmap);
 	close(fdmap);
 	fdmap = open(archivo, O_RDONLY);
-	dat->mapa = malloc(sizeof(char **) * (dat->filmap + 1));
+	dat->mapa = ft_calloc(sizeof(char **) * (dat->filmap + 1), 1);
 	ft_savemap(dat, fdmap);
 	close(fdmap);
 }

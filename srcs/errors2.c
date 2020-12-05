@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 14:17:46 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:41:30 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_valmap(char **mapa, t_datos *dat)
 			if (mapa[a][b] == 'N' || mapa[a][b] == 'S' ||
 				mapa[a][b] == 'E' || mapa[a][b] == 'W')
 			{
+				dat->cardinal = mapa[a][b];
 				x = a;
 				y = b;
 				cont++;
@@ -61,6 +62,8 @@ void	ft_valmap(char **mapa, t_datos *dat)
 		perror("Error\nHay 0 o mas de 1 posicion de jugador");
 		exit(6);
 	}
+	dat->rct->plposx = x;
+	dat->rct->plposy = y;
 	ft_valmap2(mapa, x, y, dat);
 }
 

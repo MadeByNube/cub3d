@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:52:12 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/01 14:41:23 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:40:50 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 void	ft_raycasting(t_datos *dat)
 {
-	ft_preraycasting(dat);
-	ft_openwindow(dat);
+	dat->mlx_ptr = mlx_init();
+	//ft_texturas(dat);
+	dat->win_ptr = mlx_new_window(dat->mlx_ptr, dat->r1, dat->r2, "cub3D");
+	//printf("hola2\n%i\n%i\n%i\n", dat->bits_per_pixel, dat->line_length, dat->endian);
+	mlx_loop_hook(dat->mlx_ptr, ft_main_loop, dat);
+	mlx_key_hook(dat->win_ptr, key_hook, dat);
+	mlx_loop(dat->mlx_ptr);
 }
 
 void	ft_mlx_pixel_put(t_datos *dat, int x, int y, int color)
@@ -26,16 +31,6 @@ void	ft_mlx_pixel_put(t_datos *dat, int x, int y, int color)
 	*(unsigned int*)aux = color;
 }
 
-void	ft_openwindow(t_datos *dat)
-{
-	dat->mlx_ptr = mlx_init();
-	dat->win_ptr = mlx_new_window(dat->mlx_ptr, dat->r1, dat->r2, "cub3D");
-	//printf("hola2\n%i\n%i\n%i\n", dat->bits_per_pixel, dat->line_length, dat->endian);
-	mlx_loop_hook(dat->mlx_ptr, ft_inside, dat);
-	mlx_key_hook(dat->win_ptr, key_hook, dat);
-	mlx_loop(dat->mlx_ptr);
-}
-
 void	ft_floor_and_sky(t_datos *dat)
 {
 	int x;
@@ -43,21 +38,14 @@ void	ft_floor_and_sky(t_datos *dat)
 
 	x = 0;
 	y = 0;
-	while (y < (dat->r2 / 2))
-	{
-		while (x < dat->r1)
-		{
-			ft_mlx_pixel_put(dat, x, y, ft_color(dat->f));
-			x++;
-		}
-		x = 0;
-		y++;
-	}
 	while (y < (dat->r2))
 	{
 		while (x < dat->r1)
 		{
-			ft_mlx_pixel_put(dat, x, y, ft_color(dat->c));
+			if	(y < (dat->r2 / 2))
+				ft_mlx_pixel_put(dat, x, y, ft_color(dat->f));
+			else
+				ft_mlx_pixel_put(dat, x, y, ft_color(dat->c));
 			x++;
 		}
 		x = 0;
