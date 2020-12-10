@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:52:12 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/04 11:40:50 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:25:03 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_raycasting(t_datos *dat)
 	dat->win_ptr = mlx_new_window(dat->mlx_ptr, dat->r1, dat->r2, "cub3D");
 	//printf("hola2\n%i\n%i\n%i\n", dat->bits_per_pixel, dat->line_length, dat->endian);
 	mlx_loop_hook(dat->mlx_ptr, ft_main_loop, dat);
-	mlx_key_hook(dat->win_ptr, key_hook, dat);
+	mlx_hook(dat->win_ptr, 2, 1L<<0, key_hook, dat);
 	mlx_loop(dat->mlx_ptr);
 }
 

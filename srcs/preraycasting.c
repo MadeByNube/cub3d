@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/05 12:26:09 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:26:35 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	ft_intmap(t_datos *dat)
 		y = 0;
 	}*/
 }
-
 void	ft_configadd(t_datos *dat)
 {
 	char **aux;

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/04 11:11:29 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/08 11:22:14 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ int	ft_main_loop(t_datos *dat)
 	mlx_destroy_image(dat->mlx_ptr, dat->img);
 	return (0);
 }
-

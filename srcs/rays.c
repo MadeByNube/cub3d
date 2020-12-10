@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/05 11:08:34 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:08:31 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,27 @@ void	ft_rays(t_datos *dat)
 void	ft_verline(int x, t_datos *dat)
 {
 	int y;
-	
-	y = dat->rct->drawstart;
+	int floor;
+	int ceiling;
+
+	floor = ft_color(dat->f);
+	ceiling = ft_color(dat->c);
+	y = 0;
+
+	while (y < dat->rct->drawstart)
+	{
+		ft_mlx_pixel_put(dat, x, y, floor);
+		y++;
+	}
 	while (y < dat->rct->drawend)
 	{
 		ft_mlx_pixel_put(dat, x, y, 1022783);
 		y++;
 	}
+	while (y < dat->r2)
+	{
+		ft_mlx_pixel_put(dat, x, y, ceiling);
+		y++;
+	}
+	
 }
