@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/08 11:22:14 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:46:03 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_main_loop(t_datos *dat)
 	//dat->text_img= mlx_get_data_addr(dat->texture, &dat->bits_per_pixel, &dat->line_length, &dat->endian);
 	//ft_floor_and_sky(dat);
 	//ft_player(dat);
+	key_hook(dat);
 	ft_rays(dat);
 	mlx_put_image_to_window(dat->mlx_ptr, dat->win_ptr, dat->img, 0, 0);
 	mlx_destroy_image(dat->mlx_ptr, dat->img);

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/09 11:08:31 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:35:43 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_rays(t_datos *dat)
 	while (x < dat->r1)
 	{
 		//calculamos posición del rayo y dirección
-		dat->rct->camx = 2 * x / (double)dat->r1 - 1;
+		dat->rct->camx = 2 * x / (double)(dat->r1) - 1;
 		dat->rct->raydirx = dat->rct->dirx + dat->rct->planex * dat->rct->camx;
 		dat->rct->raydiry = dat->rct->diry + dat->rct->planey * dat->rct->camx;
 		//cuadrado en el que nos encontramos:

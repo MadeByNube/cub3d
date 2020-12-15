@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/05 10:25:21 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/15 12:59:32 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
-# define movespeed			0.3
-# define rotspeed			0.0872665
+# define movespeed			0.03
+# define rotspeed			0.04363325
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -141,7 +141,17 @@
 # include <mlx.h>
 # include "../libft/libft.h"
 # include <math.h>
-typedef struct	t_raycast
+typedef struct	s_textures
+{
+	void *img;
+	char *addr;
+	int size;
+	int bpp;
+	int width;
+	int heght;
+	int endian;
+}				t_textures;
+typedef struct	s_raycast
 {
 	double plposx;
 	double plposy;
@@ -213,6 +223,14 @@ typedef struct	s_datos
 	int text_height;
 	char *text_img;
 	char cardinal;
+	int keyw;
+	int keys;
+	int keya;
+	int keyd;
+	int right;
+	int left;
+	int keyesc;
+	t_textures	*tex;
 	t_raycast	*rct;
 }				t_datos;
 
@@ -263,11 +281,14 @@ void		ft_configadd(t_datos *dat);
 void		ft_floor_and_sky(t_datos *dat);
 void		ft_mlx_pixel_put(t_datos *dat, int x, int y, int color);
 int			ft_color(char *cadena);
-int			key_hook(int keycode, t_datos *dat);
+int			key_hook(t_datos *dat);
 int			ft_main_loop(t_datos *dat);
 void		ft_texturas(t_datos *dat);
 void		ft_rays(t_datos *dat);
 void		ft_dirpos(t_datos *dat);
 void		ft_prerays(t_datos *dat);
 void		ft_verline(int x, t_datos *dat);
+int			ft_keypress(int key, t_datos *dat);
+int			ft_keyrelease(int key, t_datos *dat);
+void		ft_exit(t_datos *dat);
 #endif

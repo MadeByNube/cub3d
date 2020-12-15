@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/10 11:26:35 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/15 12:42:57 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ void	ft_configadd(t_datos *dat)
 	dat->posx = 450;
 	dat->posy = 250;
 	free(aux);
+	dat->keyw = 0;
+	dat->keys = 0;
+	dat->keyd = 0;
+	dat->keya = 0;
+	dat->left = 0;
+	dat->right = 0;
 }
 
 void	ft_texturas(t_datos *dat)
@@ -127,4 +133,48 @@ void	ft_dirpos(t_datos *dat)
 		dat->rct->planex = 0.66;
 		dat->rct->planey = 0;
 	}
+}
+
+int	ft_keypress(int key, t_datos *dat)
+{
+	if (key == KEY_W)
+		dat->keyw = 1;
+	if (key == KEY_S)
+		dat->keys = 1;
+	if (key == KEY_D)
+		dat->keyd = 1;
+	if (key == KEY_A)
+		dat->keya = 1;
+	if (key == KEY_LEFT)
+		dat->left = 1;
+	if (key == KEY_RIGHT)
+		dat->right = 1;
+	if (key == KEY_ESCAPE)
+		ft_exit(dat);
+	return(0);
+}
+
+int	ft_keyrelease(int key, t_datos *dat)
+{
+	if (key == KEY_W)
+		dat->keyw = 0;
+	if (key == KEY_S)
+		dat->keys = 0;
+	if (key == KEY_D)
+		dat->keyd = 0;
+	if (key == KEY_A)
+		dat->keya = 0;
+	if (key == KEY_LEFT)
+		dat->left = 0;
+	if (key == KEY_RIGHT)
+		dat->right = 0;
+	return(0);
+}
+
+void	ft_exit(t_datos *dat)
+{
+	mlx_destroy_window(dat->mlx_ptr, dat->win_ptr);
+	dat->mlx_ptr = NULL;
+	free(dat->mlx_ptr);
+	exit(19);
 }

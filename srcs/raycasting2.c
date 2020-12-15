@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:48:29 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/09 13:25:07 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:18:52 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,37 @@ int		ft_color(char *cadena)
 	return (color);
 }
 
-int		key_hook(int keycode, t_datos *dat)
+int		key_hook(t_datos *dat)
 {
-	if (keycode == KEY_W)
+	if (dat->keyw == 1)
 	{
 		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->dirx * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx += dat->rct->dirx * movespeed;
 		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy + dat->rct->diry * movespeed)] == 0)
 			dat->rct->plposy += dat->rct->diry * movespeed;
 	}
-	else if (keycode == KEY_S)
+	if (dat->keys == 1)
 	{
 		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->dirx * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx -= dat->rct->dirx * movespeed;
-		if (dat->mapint[(int)dat->rct->plposy][(int)(dat->rct->plposy - dat->rct->diry * movespeed)] == 0)
+		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy - dat->rct->diry * movespeed)] == 0)
 			dat->rct->plposy -= dat->rct->diry * movespeed;
 	}
-	else if (keycode == KEY_A)
+	if (dat->keya == 1)
 	{
 		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx -= dat->rct->planex * movespeed;
 		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)
 			dat->rct->plposy -= dat->rct->planey * movespeed;
 	}
-	if (keycode == KEY_D)
+	if (dat->keyd == 1)
 	{
 		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx += dat->rct->planex * movespeed;
 		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)
 			dat->rct->plposy += dat->rct->planey * movespeed;
 	}
-	else if (keycode == KEY_RIGHT)
+	if (dat->right == 1)
 	{
 		dat->rct->olddirx = dat->rct->dirx;
 		dat->rct->dirx = dat->rct->dirx * cos(-rotspeed) - dat->rct->diry * sin(-rotspeed);
@@ -65,7 +65,7 @@ int		key_hook(int keycode, t_datos *dat)
 		dat->rct->planex = dat->rct->planex * cos(-rotspeed) - dat->rct->planey * sin(-rotspeed);
 		dat->rct->planey = dat->rct->oldplanex * sin(-rotspeed) + dat->rct->planey * cos(-rotspeed);
 	}
-	else if (keycode == KEY_LEFT)
+	if (dat->left == 1)
 	{
 		dat->rct->olddirx = dat->rct->dirx;
 		dat->rct->dirx = dat->rct->dirx * cos(rotspeed) - dat->rct->diry * sin(rotspeed);
@@ -73,11 +73,6 @@ int		key_hook(int keycode, t_datos *dat)
 		dat->rct->oldplanex = dat->rct->planex;
 		dat->rct->planex = dat->rct->planex * cos(rotspeed) - dat->rct->planey * sin(rotspeed);
 		dat->rct->planey = dat->rct->oldplanex * sin(rotspeed) + dat->rct->planey * cos(rotspeed);		
-	}
-	else if (keycode == KEY_ESCAPE)
-	{
-		//mlx_destroy_window(dat->mlx_ptr, dat->win_ptr); Da segmentation fault
-		exit(16);
 	}
 	return (0);
 }
