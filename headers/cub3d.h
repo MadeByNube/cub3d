@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/15 14:02:43 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 11:22:03 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,6 @@ typedef struct	s_datos
 	int line_length;
 	int bits_per_pixel;
 	int endian;
-	int posx;
-	int posy;
 	void *texture;
 	int text_width;
 	int text_height;
@@ -278,7 +276,6 @@ void		ft_raycasting(t_datos *dat);
 void		ft_preraycasting(t_datos *dat);
 void		ft_intmap(t_datos *dat);
 void		ft_configadd(t_datos *dat);
-void		ft_floor_and_sky(t_datos *dat);
 void		ft_mlx_pixel_put(t_datos *dat, int x, int y, int color);
 int			ft_color(char *cadena);
 int			key_hook(t_datos *dat);
@@ -291,4 +288,5 @@ void		ft_verline(int x, t_datos *dat);
 int			ft_keypress(int key, t_datos *dat);
 int			ft_keyrelease(int key, t_datos *dat);
 void		ft_exit(t_datos *dat);
+int			ft_wallorient(t_datos *dat);
 #endif

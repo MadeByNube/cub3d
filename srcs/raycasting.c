@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:52:12 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/15 12:18:11 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 11:21:49 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,3 @@ void	ft_mlx_pixel_put(t_datos *dat, int x, int y, int color)
 	*(unsigned int*)aux = color;
 }
 
-void	ft_floor_and_sky(t_datos *dat)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (y < (dat->r2))
-	{
-		while (x < dat->r1)
-		{
-			if	(y < (dat->r2 / 2))
-				ft_mlx_pixel_put(dat, x, y, ft_color(dat->f));
-			else
-				ft_mlx_pixel_put(dat, x, y, ft_color(dat->c));
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}

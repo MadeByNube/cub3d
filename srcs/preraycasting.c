@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/15 12:42:57 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 11:34:30 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_intmap(t_datos *dat)
 			else if	(dat->mapa[x][y] == '1')
 				dat->mapint[x][y] = 1;
 			else if (dat->mapa[x][y] == ' ')
-				dat->mapint[x][y] = 4;
+				dat->mapint[x][y] = 0;
 			y++;
 		}
 		x++;
@@ -79,8 +79,6 @@ void	ft_configadd(t_datos *dat)
 	aux = ft_split(dat->r, ' ');
 	dat->r1 = ft_atoi(aux[1]);
 	dat->r2 = ft_atoi(aux[2]);
-	dat->posx = 450;
-	dat->posy = 250;
 	free(aux);
 	dat->keyw = 0;
 	dat->keys = 0;

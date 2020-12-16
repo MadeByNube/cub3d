@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/15 13:35:43 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 11:10:02 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_verline(int x, t_datos *dat)
 	}
 	while (y < dat->rct->drawend)
 	{
-		ft_mlx_pixel_put(dat, x, y, 1022783);
+		ft_mlx_pixel_put(dat, x, y, ft_wallorient(dat));
 		y++;
 	}
 	while (y < dat->r2)
@@ -121,4 +121,17 @@ void	ft_verline(int x, t_datos *dat)
 		y++;
 	}
 	
+}
+
+int		ft_wallorient(t_datos *dat)
+{
+	if (dat->rct->side == 0 && dat->rct->raydirx > 0)
+		return (16776960);
+	if (dat->rct->side == 0 && dat->rct->raydirx <= 0)
+		return (16777215);
+	if (dat->rct->side == 1 && dat->rct->raydiry > 0)
+		return (16757504);
+	if (dat->rct->side == 1 && dat->rct->raydiry <= 0)
+		return (16719080);
+	return (0);
 }

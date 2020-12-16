@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/04 11:41:30 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 11:24:12 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_valmap(char **mapa, t_datos *dat)
 		perror("Error\nHay 0 o mas de 1 posicion de jugador");
 		exit(6);
 	}
-	dat->rct->plposx = x;
-	dat->rct->plposy = y;
+	dat->rct->plposx = x + 0.5;
+	dat->rct->plposy = y + 0.5;
 	ft_valmap2(mapa, x, y, dat);
 }
 
