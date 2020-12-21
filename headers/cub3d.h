@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 11:22:03 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:13:31 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,14 @@
 # include <math.h>
 typedef struct	s_textures
 {
-	void *img;
-	char *addr;
-	int size;
-	int bpp;
-	int width;
-	int heght;
-	int endian;
+	void *img;	//
+	char *addr;	//
+	char *rute;
+	int size;	//
+	int bpp;	//
+	int width;	//
+	int height;	//
+	int endian;	//
 }				t_textures;
 typedef struct	s_raycast
 {
@@ -217,8 +218,6 @@ typedef struct	s_datos
 	int bits_per_pixel;
 	int endian;
 	void *texture;
-	int text_width;
-	int text_height;
 	char *text_img;
 	char cardinal;
 	int keyw;
@@ -228,8 +227,16 @@ typedef struct	s_datos
 	int right;
 	int left;
 	int keyesc;
-	t_textures	*tex;
+	t_textures	tex[5];
+	int text;
 	t_raycast	*rct;
+	int texnum;
+	double wallx;
+	int tex_x;
+	double step;
+	double texpos;
+	int texy;
+	unsigned int color;
 }				t_datos;
 
 char		*ft_strjoingnl(char *str1, char car);
@@ -289,4 +296,5 @@ int			ft_keypress(int key, t_datos *dat);
 int			ft_keyrelease(int key, t_datos *dat);
 void		ft_exit(t_datos *dat);
 int			ft_wallorient(t_datos *dat);
+int			ft_pixel_get(t_datos *dat, int x, int y);
 #endif

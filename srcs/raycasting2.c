@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:48:29 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 11:29:17 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/21 13:35:37 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int		key_hook(t_datos *dat)
 	}
 	if (dat->keya == 1)
 	{
-		//printf("%i \n", dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy + dat->rct->planey * movespeed)]);
-		printf("%f-%f , %f-%f \n", dat->rct->plposx, dat->rct->plposx + movespeed, dat->rct->plposy, dat->rct->plposy + movespeed);
 		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx -= dat->rct->planex * movespeed;
 		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy - dat->rct->planey * movespeed)] == 0)
@@ -53,7 +51,7 @@ int		key_hook(t_datos *dat)
 	}
 	if (dat->keyd == 1)
 	{
-		printf("%f-%f , %f-%f \n", dat->rct->plposx, dat->rct->plposx + movespeed, dat->rct->plposy, dat->rct->plposy + movespeed);
+
 		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * movespeed)][(int)dat->rct->plposy] == 0)
 			dat->rct->plposx += dat->rct->planex * movespeed;
 		if (dat->mapint[(int)dat->rct->plposx][(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/03 12:23:53 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/16 12:40:20 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_correctconfig(t_datos *dat)
 		exit(13);
 	}
 }
-void	ft_quitaespacios2000(char *f)
+void	ft_quitaespacios2000(char *f) //funciona pero no hago nada con el resultado (cambiar)
 {
 	int i;
 	int pos;

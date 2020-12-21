@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 11:10:02 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:12:06 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,31 @@ void	ft_rays(t_datos *dat)
 		dat->rct->drawend = dat->rct->lineheight / 2 + dat->r2 / 2;
 		if (dat->rct->drawend >= dat->r2)
 			dat->rct->drawend = dat->r2 - 1;
+		//empezamos texturas
+		//calculamos el valor de wallx
+		if (dat->rct->side == 0)
+			dat->wallx = dat->rct->plposy + dat->rct->perpwalldist * dat->rct->raydiry;
+		else
+			dat->wallx = dat->rct->plposx + dat->rct->perpwalldist * dat->rct->raydirx;
+		dat->wallx -= floor(dat->wallx);
+		if (dat->rct->side == 0 && dat->rct->raydirx > 0)
+			dat->text = 0;
+		if (dat->rct->side == 0 && dat->rct->raydirx <= 0)
+			dat->text = 1;
+		if (dat->rct->side == 1 && dat->rct->raydiry > 0)
+			dat->text = 2;
+		if (dat->rct->side == 1 && dat->rct->raydiry <= 0)
+			dat->text = 3;
+		//coordenada x de la textura
+		dat->tex_x = (int)(dat->wallx * (double)dat->tex[dat->text].width);
+		if (dat->rct->side == 0 && dat->rct->raydirx > 0)
+			dat->tex_x = dat->tex[dat->text].width - dat->tex_x - 1;
+		if (dat->rct->side == 1 && dat->rct->raydiry < 0)
+			dat->tex_x = dat->tex[dat->text].width - dat->tex_x - 1;
+		//Averiguamos cuanto tenemos que estirar la textura en la pantalla
+		dat->step = 1.0 * dat->tex[dat->text].height / dat->rct->lineheight;
+		//coordenada de inicio de la textura
+		dat->texpos = (dat->rct->drawstart - dat->r2 / 2 + dat->rct->lineheight / 2) * dat->step;
 		//Dibujar los píxeles en la línea vertical
 		ft_verline(x, dat);
 		x++;
@@ -112,7 +137,9 @@ void	ft_verline(int x, t_datos *dat)
 	}
 	while (y < dat->rct->drawend)
 	{
-		ft_mlx_pixel_put(dat, x, y, ft_wallorient(dat));
+		dat->texy = (int)dat->texpos & (dat->tex[dat->text].height - 1);
+		dat->texpos += dat->step;
+		ft_mlx_pixel_put(dat, x, y, ft_pixel_get(dat, dat->tex_x, dat->texy));
 		y++;
 	}
 	while (y < dat->r2)
@@ -120,18 +147,4 @@ void	ft_verline(int x, t_datos *dat)
 		ft_mlx_pixel_put(dat, x, y, ceiling);
 		y++;
 	}
-	
-}
-
-int		ft_wallorient(t_datos *dat)
-{
-	if (dat->rct->side == 0 && dat->rct->raydirx > 0)
-		return (16776960);
-	if (dat->rct->side == 0 && dat->rct->raydirx <= 0)
-		return (16777215);
-	if (dat->rct->side == 1 && dat->rct->raydiry > 0)
-		return (16757504);
-	if (dat->rct->side == 1 && dat->rct->raydiry <= 0)
-		return (16719080);
-	return (0);
 }

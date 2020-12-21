@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 11:34:30 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:28:02 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,6 @@ void	ft_configadd(t_datos *dat)
 	dat->keya = 0;
 	dat->left = 0;
 	dat->right = 0;
-}
-
-void	ft_texturas(t_datos *dat)
-{
-	char **aux;
-
-	aux = ft_split(dat->no, ' ');
-	dat->texture = mlx_xpm_file_to_image(dat->mlx_ptr, aux[1], &dat->text_width, &dat->text_width);
-	exit(1);
 }
 
 void	ft_prerays(t_datos *dat)
