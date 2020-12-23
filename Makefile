@@ -22,7 +22,7 @@ SRCS		= srcs/genmap.c\
 OBJS		= $(SRCS:.c=.o)
 
 LIBFT		:= libft/libft.a
-FLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
+FLAGS		= -Wall -Wextra -Werror -g -O3 -fsanitize=address
 GCC			= gcc
 INCLUDE		= -I minilibx -I headers
 MLX_DIR		= minilibx_opengl

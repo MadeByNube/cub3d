@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/21 14:12:06 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/23 13:00:59 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_rays(t_datos *dat)
 {
-	double x;
+	int x;
 
 	x = 0;
 //Recorro las columnas. Hay tantas columnas como ancho hay en la resolución (dat->r1)
@@ -114,8 +114,12 @@ void	ft_rays(t_datos *dat)
 		dat->step = 1.0 * dat->tex[dat->text].height / dat->rct->lineheight;
 		//coordenada de inicio de la textura
 		dat->texpos = (dat->rct->drawstart - dat->r2 / 2 + dat->rct->lineheight / 2) * dat->step;
+		//sprites (creo)
+		
 		//Dibujar los píxeles en la línea vertical
 		ft_verline(x, dat);
+		//Sprites
+		ft_spritesbucle(dat, x);
 		x++;
 	}	
 }
@@ -146,5 +150,133 @@ void	ft_verline(int x, t_datos *dat)
 	{
 		ft_mlx_pixel_put(dat, x, y, ceiling);
 		y++;
+	}
+}
+
+void	ft_spritesbucle(t_datos *dat, int x)
+{
+	int i;
+
+	i = 0;
+	dat->zbuffer[x] = dat->rct->perpwalldist;
+	while (i < dat->sprcount)
+	{
+		dat->spr_ord[i] = i + 1;
+		dat->spr_dist[i] = ((dat->rct->plposx - dat->sprarray[i][0]) * (dat->rct->plposx - dat->sprarray[i][0])
+			+ (dat->rct->plposy - dat->sprarray[i][1]) * (dat->rct->plposy - dat->sprarray[i][1]));
+		i++;
+	}
+	ft_sortsprites(dat);
+	ft_aftersort(dat);
+}
+
+static double	ft_nummayor(t_datos *dat)
+{
+	double nummayor;
+	int i;
+
+	i = 0;
+	while (dat->spr_dist[i])
+	{
+		if (dat->spr_dist[i] > nummayor)
+			nummayor = dat->spr_dist[i];
+		i++;
+	}
+	return (nummayor + 1);
+}
+
+void	ft_sortsprites(t_datos *dat)
+{
+	int i;
+	int j;
+	double nummenor;
+	double menorant;
+	double nummayor = ft_nummayor(dat);
+
+	i = 0;
+	j = 0;
+	nummenor = nummayor;
+	menorant = 0;
+
+	while (dat->spr_ord[j])
+	{
+		while (dat->spr_dist[i])
+		{
+			if (dat->spr_dist[i] < nummenor & dat->spr_dist[i] > menorant)
+			{
+				nummenor = dat->spr_dist[i];
+				dat->spr_ord[j] = i;
+			}
+			i++;
+		}
+		menorant = nummenor;
+		j++;
+		nummenor = nummayor;
+		i = 0;
+	}
+}
+
+void	ft_aftersort(t_datos *dat)
+{
+	int i;
+
+	i = 0;
+	//proyección y dibujado
+	while (i < dat->sprcount)
+	{
+		//transladar la posicion relativa del sprite a la cámara 
+		dat->spritex = dat->sprarray[dat->spr_ord[i]][0] - dat->rct->plposx;
+		dat->spritey = dat->sprarray[dat->spr_ord[i]][1] - dat->rct->plposy;
+		//transformar el sprite con la camara de la matriz inversa
+		dat->invdet = 1.0 / (dat->rct->planex * dat->rct->diry - dat->rct->dirx * dat->rct->planey);
+		dat->transformx = dat->invdet * (dat->rct->diry * dat->spritex - dat->rct->dirx * dat->spritey);
+		dat->transformy = dat->invdet * (-dat->rct->planey * dat->spritex + dat->rct->planex * dat->spritey);
+		dat->spritescreenx = (int)((dat->r1 / 2) * (1 + dat->transformx / dat->transformy));
+		//calculamos el alto del sprite en la pantalla
+		dat->spriteheight = abs((int)(dat->r2 / (dat->transformy)));
+		//calculamos el pixel mas alto y mas bajo para rellenar
+		dat->drawstarty = -dat->spriteheight / 2 + dat->r2 / 2;
+		if (dat->drawstarty < 0)
+			dat->drawstarty = 0;
+		dat->drawendy = dat->spriteheight / 2 + dat->r2 / 2;
+		if (dat->drawendy >= dat->r2)
+			dat->drawendy = dat->r2 - 1;
+		//calculamos el ancho del sprite
+		dat->spritewidth = abs((int)(dat->r1 / (dat->transformy)));
+		dat->drawstartx = -dat->spritewidth / 2 + dat->spritescreenx;
+		if (dat->drawstartx < 0)
+			dat->drawstartx = 0;
+		dat->drawendx = dat->spritewidth / 2 + dat->spritescreenx;
+		if (dat->drawendx >= dat->r1)
+			dat->drawendx = dat->r1 - 1;
+		//loop para cada linea vertical
+		ft_drawsprite(dat);
+		i++;
+	}
+}
+void	ft_drawsprite(t_datos *dat)
+{
+	int stripe;
+	int tex_x;
+	int y;
+	int d;
+	int tex_y;
+	
+	stripe = dat->drawstartx;
+	while (stripe < dat->drawendx)
+	{
+		tex_x = (int)(256 * (stripe - (-dat->spritewidth / 2 + dat->spritescreenx))
+			* dat->tex->width / dat->spritewidth) / 256;
+		y = dat->drawstarty;
+		if (dat->transformy > 0 && stripe > 0 && stripe < dat->r1 && dat->transformy < dat->zbuffer[stripe])
+			while (y < dat->drawendy)
+			{
+				d = (y) * 256 - dat->r2 * 128 + dat->spriteheight * 128;
+				tex_y = ((d * dat->tex->height) / dat->spriteheight) / 256;
+				//problema
+				ft_mlx_pixel_put(dat, stripe, y, ft_pixel_get2(dat, tex_x, tex_y));
+				y++;
+			}
+		stripe++;
 	}
 }

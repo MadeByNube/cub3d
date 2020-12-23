@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/21 14:13:31 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/23 12:06:49 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,23 @@ typedef struct	s_datos
 	double texpos;
 	int texy;
 	unsigned int color;
+	double *zbuffer;
+	int sprcount;
+	int **sprarray;
+	int *spr_ord;
+	double *spr_dist;
+	double spritex;
+	double spritey;
+	double invdet;
+	double transformx;
+	double transformy;
+	int spritescreenx;
+	int spriteheight;
+	int drawstarty;
+	int drawendy;
+	int spritewidth;
+	int drawstartx;
+	int drawendx;
 }				t_datos;
 
 char		*ft_strjoingnl(char *str1, char car);
@@ -297,4 +314,12 @@ int			ft_keyrelease(int key, t_datos *dat);
 void		ft_exit(t_datos *dat);
 int			ft_wallorient(t_datos *dat);
 int			ft_pixel_get(t_datos *dat, int x, int y);
+int			ft_pixel_get2(t_datos *dat, int x, int y);
+void		ft_presprites(t_datos *dat);
+int			ft_count2(t_datos *dat);
+void		ft_arraylogs(t_datos *dat);
+void		ft_sortsprites(t_datos *dat);
+void		ft_spritesbucle(t_datos *dat, int x);
+void		ft_aftersort(t_datos *dat);
+void		ft_drawsprite(t_datos *dat);
 #endif

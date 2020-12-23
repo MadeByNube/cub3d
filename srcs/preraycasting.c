@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/18 12:28:02 by cnavarro         ###   ########.fr       */
+/*   Updated: 2020/12/22 12:33:11 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_preraycasting(t_datos *dat)
 	ft_intmap(dat);
 	ft_configadd(dat);
 	ft_prerays(dat);
+	ft_presprites(dat);
 }
 
 void	ft_intmap(t_datos *dat)
@@ -86,6 +87,7 @@ void	ft_configadd(t_datos *dat)
 	dat->keya = 0;
 	dat->left = 0;
 	dat->right = 0;
+	dat->zbuffer = ft_calloc(sizeof(double), dat->r1);
 }
 
 void	ft_prerays(t_datos *dat)
@@ -166,4 +168,73 @@ void	ft_exit(t_datos *dat)
 	dat->mlx_ptr = NULL;
 	free(dat->mlx_ptr);
 	exit(19);
+}
+
+void	ft_presprites(t_datos *dat)
+{
+	int i;
+
+	i = 0;
+	dat->sprcount = ft_count2(dat);
+	dat->sprarray = ft_calloc(sizeof(int *), dat->sprcount);
+	while (i < dat->sprcount)
+	{
+		dat->sprarray[i] = ft_calloc(sizeof(int), 2);
+		i++;
+	}
+	ft_arraylogs(dat);
+	dat->zbuffer = ft_calloc(sizeof(double), dat->r2);
+	dat->spr_ord = ft_calloc(sizeof(int), dat->sprcount);
+	dat->spr_dist = ft_calloc(sizeof(double), dat->sprcount);
+}
+
+int	ft_count2(t_datos *dat)
+{
+	int count;
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	count = 0;
+
+	while (dat->mapa[x])
+	{
+		while (dat->mapa[x][y])
+		{
+			if (dat->mapa[x][y] == '2')
+				count++;
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+	return (count);
+}
+
+void	ft_arraylogs(t_datos *dat)
+{
+	int x;
+	int y;
+	int count;
+
+	x = 0;
+	y = 0;
+	count = 0;
+
+	while (dat->mapa[x])
+	{
+		while (dat->mapa[x][y])
+		{
+			if (dat->mapa[x][y] == '2')
+			{
+				dat->sprarray[count][0] = x;
+				dat->sprarray[count][1] = y;
+				count++;
+			}
+			y++;
+		}
+		x++;
+		y = 0;
+	}
 }
