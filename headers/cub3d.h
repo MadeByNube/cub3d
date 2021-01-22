@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/23 12:06:49 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/01/05 13:30:07 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,7 @@ void		ft_presprites(t_datos *dat);
 int			ft_count2(t_datos *dat);
 void		ft_arraylogs(t_datos *dat);
 void		ft_sortsprites(t_datos *dat);
-void		ft_spritesbucle(t_datos *dat, int x);
+void		ft_spritesbucle(t_datos *dat);
 void		ft_aftersort(t_datos *dat);
 void		ft_drawsprite(t_datos *dat);
 #endif

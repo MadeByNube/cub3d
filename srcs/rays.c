@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/23 13:00:59 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:15:33 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ void	ft_rays(t_datos *dat)
 		//Dibujar los píxeles en la línea vertical
 		ft_verline(x, dat);
 		//Sprites
-		ft_spritesbucle(dat, x);
 		x++;
-	}	
+	}
+	ft_spritesbucle(dat);
 }
 
 void	ft_verline(int x, t_datos *dat)
@@ -134,6 +134,7 @@ void	ft_verline(int x, t_datos *dat)
 	ceiling = ft_color(dat->c);
 	y = 0;
 
+	dat->zbuffer[x] = dat->rct->perpwalldist;
 	while (y < dat->rct->drawstart)
 	{
 		ft_mlx_pixel_put(dat, x, y, floor);
@@ -153,12 +154,11 @@ void	ft_verline(int x, t_datos *dat)
 	}
 }
 
-void	ft_spritesbucle(t_datos *dat, int x)
+void	ft_spritesbucle(t_datos *dat)
 {
 	int i;
 
 	i = 0;
-	dat->zbuffer[x] = dat->rct->perpwalldist;
 	while (i < dat->sprcount)
 	{
 		dat->spr_ord[i] = i + 1;
@@ -170,50 +170,29 @@ void	ft_spritesbucle(t_datos *dat, int x)
 	ft_aftersort(dat);
 }
 
-static double	ft_nummayor(t_datos *dat)
-{
-	double nummayor;
-	int i;
-
-	i = 0;
-	while (dat->spr_dist[i])
-	{
-		if (dat->spr_dist[i] > nummayor)
-			nummayor = dat->spr_dist[i];
-		i++;
-	}
-	return (nummayor + 1);
-}
-
 void	ft_sortsprites(t_datos *dat)
 {
-	int i;
-	int j;
-	double nummenor;
-	double menorant;
-	double nummayor = ft_nummayor(dat);
+    int     i;
+    int     j;
+    int     temp;
 
-	i = 0;
-	j = 0;
-	nummenor = nummayor;
-	menorant = 0;
-
-	while (dat->spr_ord[j])
-	{
-		while (dat->spr_dist[i])
-		{
-			if (dat->spr_dist[i] < nummenor & dat->spr_dist[i] > menorant)
-			{
-				nummenor = dat->spr_dist[i];
-				dat->spr_ord[j] = i;
-			}
-			i++;
-		}
-		menorant = nummenor;
-		j++;
-		nummenor = nummayor;
-		i = 0;
-	}
+    i = 0;
+    j = 0;
+    while (i < dat->sprcount)
+    {
+        j = i + 1;
+        while (j < dat->sprcount)
+        {
+            if (dat->spr_dist[dat->spr_ord[i]] < dat->spr_dist[dat->spr_ord[j]])
+            {
+                temp = dat->spr_ord[i];
+                dat->spr_ord[i] = dat->spr_ord[j];
+                dat->spr_ord[j] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 void	ft_aftersort(t_datos *dat)
@@ -225,8 +204,8 @@ void	ft_aftersort(t_datos *dat)
 	while (i < dat->sprcount)
 	{
 		//transladar la posicion relativa del sprite a la cámara 
-		dat->spritex = dat->sprarray[dat->spr_ord[i]][0] - dat->rct->plposx;
-		dat->spritey = dat->sprarray[dat->spr_ord[i]][1] - dat->rct->plposy;
+		dat->spritex = (double)dat->sprarray[dat->spr_ord[i]][0] - (dat->rct->plposx - 0.5);
+		dat->spritey = (double)dat->sprarray[dat->spr_ord[i]][1] - (dat->rct->plposy - 0.5);
 		//transformar el sprite con la camara de la matriz inversa
 		dat->invdet = 1.0 / (dat->rct->planex * dat->rct->diry - dat->rct->dirx * dat->rct->planey);
 		dat->transformx = dat->invdet * (dat->rct->diry * dat->spritex - dat->rct->dirx * dat->spritey);
