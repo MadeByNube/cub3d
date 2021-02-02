@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/01/07 12:15:33 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/02 11:36:13 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	ft_spritesbucle(t_datos *dat)
 	int i;
 
 	i = 0;
+	ft_sortsprites(dat);
 	while (i < dat->sprcount)
 	{
 		dat->spr_ord[i] = i + 1;
@@ -166,7 +167,6 @@ void	ft_spritesbucle(t_datos *dat)
 			+ (dat->rct->plposy - dat->sprarray[i][1]) * (dat->rct->plposy - dat->sprarray[i][1]));
 		i++;
 	}
-	ft_sortsprites(dat);
 	ft_aftersort(dat);
 }
 
@@ -204,8 +204,8 @@ void	ft_aftersort(t_datos *dat)
 	while (i < dat->sprcount)
 	{
 		//transladar la posicion relativa del sprite a la cámara 
-		dat->spritex = (double)dat->sprarray[dat->spr_ord[i]][0] - (dat->rct->plposx - 0.5);
-		dat->spritey = (double)dat->sprarray[dat->spr_ord[i]][1] - (dat->rct->plposy - 0.5);
+		dat->spritex = (double)dat->sprarray[dat->spr_ord[i] - 1][0] - (dat->rct->plposx - 0.5);
+		dat->spritey = (double)dat->sprarray[dat->spr_ord[i] - 1][1] - (dat->rct->plposy - 0.5);
 		//transformar el sprite con la camara de la matriz inversa
 		dat->invdet = 1.0 / (dat->rct->planex * dat->rct->diry - dat->rct->dirx * dat->rct->planey);
 		dat->transformx = dat->invdet * (dat->rct->diry * dat->spritex - dat->rct->dirx * dat->spritey);
@@ -240,6 +240,7 @@ void	ft_drawsprite(t_datos *dat)
 	int y;
 	int d;
 	int tex_y;
+	unsigned int color;
 	
 	stripe = dat->drawstartx;
 	while (stripe < dat->drawendx)
@@ -252,8 +253,9 @@ void	ft_drawsprite(t_datos *dat)
 			{
 				d = (y) * 256 - dat->r2 * 128 + dat->spriteheight * 128;
 				tex_y = ((d * dat->tex->height) / dat->spriteheight) / 256;
-				//problema
-				ft_mlx_pixel_put(dat, stripe, y, ft_pixel_get2(dat, tex_x, tex_y));
+				color = ft_pixel_get2(dat, tex_x, tex_y);
+				if ((color & 0x00FFFFFF) != 0)
+					ft_mlx_pixel_put(dat, stripe, y, ft_pixel_get2(dat, tex_x, tex_y));
 				y++;
 			}
 		stripe++;
