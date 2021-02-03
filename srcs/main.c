@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:52 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/03 12:37:27 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:21:27 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int	main(int args, char **argv)
 	ft_preraycasting(dat);
 	ft_raycasting(dat);
 	ft_frees(dat);
-	system("leaks cub3D");
 	return (0);
 }

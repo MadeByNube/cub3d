@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/03 12:34:39 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:59:00 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ void	ft_configadd(t_datos *dat)
 	aux = ft_split(dat->r, ' ');
 	dat->r1 = ft_atoi(aux[1]);
 	dat->r2 = ft_atoi(aux[2]);
+	if (dat->r1 > INT32_MAX || dat->r2 > INT32_MAX)
+	{
+		perror("Error:\nResolucion incorrecta");
+		exit(30);
+	}
+	if (dat->r1 > 2560)
+		dat->r1 = 2560;
+	if (dat->r2 > 1440)
+		dat->r2 = 1440;
 	ft_freematrix(aux);
 	dat->keyw = 0;
 	dat->keys = 0;
@@ -162,12 +171,13 @@ int	ft_keyrelease(int key, t_datos *dat)
 	return(0);
 }
 
-void	ft_exit(t_datos *dat)
+int	ft_exit(t_datos *dat)
 {
 	mlx_destroy_window(dat->mlx_ptr, dat->win_ptr);
 	dat->mlx_ptr = NULL;
 	free(dat->mlx_ptr);
 	exit(19);
+	return(0);
 }
 
 void	ft_presprites(t_datos *dat)

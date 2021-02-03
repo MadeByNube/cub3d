@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/02 12:06:19 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:59:41 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
-# define movespeed			0.03
-# define rotspeed			0.04363325
+# define movespeed			0.03 * 5
+# define rotspeed			0.04363325 * 5
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -311,7 +311,7 @@ void		ft_prerays(t_datos *dat);
 void		ft_verline(int x, t_datos *dat);
 int			ft_keypress(int key, t_datos *dat);
 int			ft_keyrelease(int key, t_datos *dat);
-void		ft_exit(t_datos *dat);
+int			ft_exit(t_datos *dat);
 int			ft_wallorient(t_datos *dat);
 int			ft_pixel_get(t_datos *dat, int x, int y);
 int			ft_pixel_get2(t_datos *dat, int x, int y);
