@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/02 11:36:13 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/03 12:35:30 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,17 +162,31 @@ void	ft_spritesbucle(t_datos *dat)
 	ft_sortsprites(dat);
 	while (i < dat->sprcount)
 	{
-		dat->spr_ord[i] = i + 1;
-		dat->spr_dist[i] = ((dat->rct->plposx - dat->sprarray[i][0]) * (dat->rct->plposx - dat->sprarray[i][0])
-			+ (dat->rct->plposy - dat->sprarray[i][1]) * (dat->rct->plposy - dat->sprarray[i][1]));
+		ft_aftersort(dat, i);
+		ft_drawsprite(dat);
 		i++;
 	}
-	ft_aftersort(dat);
 }
 
 void	ft_sortsprites(t_datos *dat)
 {
-    int     i;
+	int i;
+
+	i = 0;
+
+	while (i < dat->sprcount)
+	{
+		dat->spr_ord[i] = i;
+		dat->spr_dist[i] = ((dat->rct->plposx - dat->sprarray[i][0]) * (dat->rct->plposx - dat->sprarray[i][0])
+			+ (dat->rct->plposy - dat->sprarray[i][1]) * (dat->rct->plposy - dat->sprarray[i][1]));
+			i++;
+	}
+	ft_sortsprites2(dat);
+}
+
+void	ft_sortsprites2(t_datos *dat)
+{
+	    int     i;
     int     j;
     int     temp;
 
@@ -195,17 +209,13 @@ void	ft_sortsprites(t_datos *dat)
     }
 }
 
-void	ft_aftersort(t_datos *dat)
+void	ft_aftersort(t_datos *dat, int i)
 {
-	int i;
-
-	i = 0;
 	//proyección y dibujado
-	while (i < dat->sprcount)
-	{
+
 		//transladar la posicion relativa del sprite a la cámara 
-		dat->spritex = (double)dat->sprarray[dat->spr_ord[i] - 1][0] - (dat->rct->plposx - 0.5);
-		dat->spritey = (double)dat->sprarray[dat->spr_ord[i] - 1][1] - (dat->rct->plposy - 0.5);
+		dat->spritex = (double)dat->sprarray[dat->spr_ord[i]][0] - (dat->rct->plposx - 0.5);
+		dat->spritey = (double)dat->sprarray[dat->spr_ord[i]][1] - (dat->rct->plposy - 0.5);
 		//transformar el sprite con la camara de la matriz inversa
 		dat->invdet = 1.0 / (dat->rct->planex * dat->rct->diry - dat->rct->dirx * dat->rct->planey);
 		dat->transformx = dat->invdet * (dat->rct->diry * dat->spritex - dat->rct->dirx * dat->spritey);
@@ -229,9 +239,6 @@ void	ft_aftersort(t_datos *dat)
 		if (dat->drawendx >= dat->r1)
 			dat->drawendx = dat->r1 - 1;
 		//loop para cada linea vertical
-		ft_drawsprite(dat);
-		i++;
-	}
 }
 void	ft_drawsprite(t_datos *dat)
 {

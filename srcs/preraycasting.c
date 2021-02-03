@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/22 12:33:11 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/03 12:34:39 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_configadd(t_datos *dat)
 	aux = ft_split(dat->r, ' ');
 	dat->r1 = ft_atoi(aux[1]);
 	dat->r2 = ft_atoi(aux[2]);
-	free(aux);
+	ft_freematrix(aux);
 	dat->keyw = 0;
 	dat->keys = 0;
 	dat->keyd = 0;
@@ -183,7 +183,6 @@ void	ft_presprites(t_datos *dat)
 		i++;
 	}
 	ft_arraylogs(dat);
-	dat->zbuffer = ft_calloc(sizeof(double), dat->r2);
 	dat->spr_ord = ft_calloc(sizeof(int), dat->sprcount);
 	dat->spr_dist = ft_calloc(sizeof(double), dat->sprcount);
 }
