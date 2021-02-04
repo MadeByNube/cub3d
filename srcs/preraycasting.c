@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:58:03 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/03 13:59:00 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/04 13:35:11 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	ft_configadd(t_datos *dat)
 		perror("Error:\nResolucion incorrecta");
 		exit(30);
 	}
-	if (dat->r1 > 2560)
+	if (dat->r1 > 2560 && dat->save == 0)
 		dat->r1 = 2560;
-	if (dat->r2 > 1440)
+	if (dat->r2 > 1440 && dat->save == 0)
 		dat->r2 = 1440;
 	ft_freematrix(aux);
 	dat->keyw = 0;

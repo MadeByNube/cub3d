@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/03 13:59:41 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/04 13:39:25 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,14 +254,26 @@ typedef struct	s_datos
 	int spritewidth;
 	int drawstartx;
 	int drawendx;
+	int save;
 }				t_datos;
+
+typedef struct	s_bmp
+{
+	int                 fdsave;
+    int                 filesize;
+    int                 unused;
+    int                 offset_begin;
+    int                 header_bytes;
+    short int           bmpplane;
+    short int           bmpbpx;
+}				t_bmp;
 
 char		*ft_strjoingnl(char *str1, char car);
 
 int			getnextline(char **line, int fdmap);
 void		ft_genmap(char *mapa, t_datos *dat);
 
-void		ft_args(int args, char **argv);
+void		ft_args(int args, char **argv, t_datos *dat);
 void		ft_erroresgeneral(t_datos *dat);
 void		ft_errorextmap(t_datos *dat);
 void		ft_errorargs(void);
@@ -323,4 +335,8 @@ void		ft_sortsprites2(t_datos *dat);
 void		ft_spritesbucle(t_datos *dat);
 void		ft_aftersort(t_datos *dat, int i);
 void		ft_drawsprite(t_datos *dat);
+void	ft_image(t_datos *dat);
+void	ft_writeheader(t_datos *dat, t_bmp *bmp);
+void	ft_initsave(t_datos *dat, t_bmp *bmp);
+void	ft_writebmp(t_datos *dat, t_bmp *bmp);
 #endif

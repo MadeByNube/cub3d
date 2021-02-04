@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/21 16:31:35 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/04 13:39:04 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ void	ft_errorargs(void)
 	exit(8);
 }
 
-void	ft_args(int args, char **argv)
+void	ft_args(int args, char **argv, t_datos *dat)
 {
 	if (!(args == 3 || args == 2))
 		ft_errorargs();
 	if (args == 3 && (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) != 0))
 		ft_errorargs();
+	if (args == 3 && (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) == 0))
+		dat->save = 1;
 }
