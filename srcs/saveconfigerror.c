@@ -6,13 +6,13 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 14:00:38 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/11/11 11:34:49 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:06:12 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void    ft_saveorerror_r(t_datos *dat, char *line)
+void	ft_saveorerror_r(t_datos *dat, char *line)
 {
 	if (dat->rflag == 1)
 	{
@@ -23,7 +23,7 @@ void    ft_saveorerror_r(t_datos *dat, char *line)
 	dat->rflag = 1;
 }
 
-void    ft_saveorerror_no(t_datos *dat, char *line)
+void	ft_saveorerror_no(t_datos *dat, char *line)
 {
 	if (dat->noflag == 1)
 	{
@@ -34,7 +34,7 @@ void    ft_saveorerror_no(t_datos *dat, char *line)
 	dat->noflag = 1;
 }
 
-void    ft_saveorerror_so(t_datos *dat, char *line)
+void	ft_saveorerror_so(t_datos *dat, char *line)
 {
 	if (dat->soflag == 1)
 	{
@@ -45,7 +45,7 @@ void    ft_saveorerror_so(t_datos *dat, char *line)
 	dat->soflag = 1;
 }
 
-void    ft_saveorerror_we(t_datos *dat, char *line)
+void	ft_saveorerror_we(t_datos *dat, char *line)
 {
 	if (dat->weflag == 1)
 	{

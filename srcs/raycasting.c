@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:52:12 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/04 13:40:15 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 11:25:26 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_raycasting(t_datos *dat)
 {
-
 	dat->mlx_ptr = mlx_init();
 	ft_texturas(dat);
 	if (dat->save == 1)
@@ -38,14 +37,16 @@ void	ft_mlx_pixel_put(t_datos *dat, int x, int y, int color)
 int		ft_pixel_get(t_datos *dat, int x, int y)
 {
 	char *aux;
-	
-	aux = dat->tex[dat->text].addr + (y * dat->tex[dat->text].size + x * (dat->tex[dat->text].bpp / 8));
+
+	aux = dat->tex[dat->text].addr + (y * dat->tex[dat->text].size
+		+ x * (dat->tex[dat->text].bpp / 8));
 	return (*(unsigned int*)aux);
 }
+
 int		ft_pixel_get2(t_datos *dat, int x, int y)
 {
-	char *aux;
-	
+	char	*aux;
+
 	aux = dat->tex[4].addr + (y * dat->tex[4].size + x * (dat->tex[4].bpp / 8));
 	return (*(unsigned int*)aux);
 }

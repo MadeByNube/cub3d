@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/04 13:50:07 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:24:26 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ft_main_loop(t_datos *dat)
 {
 	dat->img = mlx_new_image(dat->mlx_ptr, dat->r1, dat->r2);
-	dat->dir = mlx_get_data_addr(dat->img, &dat->bits_per_pixel, &dat->line_length, &dat->endian);
-	printf("%d\n%d\n%d\n", dat->bits_per_pixel, dat->line_length, dat->endian);
+	dat->dir = mlx_get_data_addr(dat->img, &dat->bits_per_pixel,
+		&dat->line_length, &dat->endian);
 	key_hook(dat);
 	ft_rays(dat);
 	if (dat->save == 1)

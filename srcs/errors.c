@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/04 13:39:04 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:21:28 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_errorsmap(t_datos *dat)
 {
-	char **mapa;
-	int i;
+	char	**mapa;
+	int		i;
 
 	i = 0;
 	mapa = ft_calloc(sizeof(char **) * (dat->filmap + 1), 1);

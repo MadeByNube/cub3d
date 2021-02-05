@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/04 13:39:25 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 12:35:44 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ void		ft_errorerre(char *r);
 void		ft_errors(t_datos *dat);
 void		ft_errorsmap(t_datos *dat);
 void		ft_saveconfig(int fdmap, t_datos *dat);
+void		ft_saveconfigb(t_datos *dat, int i, char *line);
 void		ft_correctconfig(t_datos *dat);
 void		ft_quitaespacios2000(char *f);
 char		*ft_convtexture(char *texture);
@@ -335,8 +336,8 @@ void		ft_sortsprites2(t_datos *dat);
 void		ft_spritesbucle(t_datos *dat);
 void		ft_aftersort(t_datos *dat, int i);
 void		ft_drawsprite(t_datos *dat);
-void	ft_image(t_datos *dat);
-void	ft_writeheader(t_datos *dat, t_bmp *bmp);
-void	ft_initsave(t_datos *dat, t_bmp *bmp);
-void	ft_writebmp(t_datos *dat, t_bmp *bmp);
+void		ft_image(t_datos *dat);
+void		ft_writeheader(t_datos *dat, t_bmp *bmp);
+void		ft_initsave(t_datos *dat, t_bmp *bmp);
+void		ft_writebmp(t_datos *dat, t_bmp *bmp);
 #endif

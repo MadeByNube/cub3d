@@ -6,13 +6,27 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/03 12:21:25 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 12:37:18 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void ft_initializedat(t_datos *dat)
+void		ft_initializedatb(t_datos *dat)
+{
+	dat->rflag = 0;
+	dat->noflag = 0;
+	dat->soflag = 0;
+	dat->weflag = 0;
+	dat->eaflag = 0;
+	dat->sflag = 0;
+	dat->fflag = 0;
+	dat->cflag = 0;
+	dat->nomaplines = 0;
+	dat->initmaplane = NULL;
+}
+
+void		ft_initializedat(t_datos *dat)
 {
 	dat->mapa = NULL;
 	dat->filmap = 0;
@@ -33,29 +47,21 @@ void ft_initializedat(t_datos *dat)
 	dat->s = 0;
 	dat->f = 0;
 	dat->c = 0;
-	dat->rflag = 0;
-	dat->noflag = 0;
-	dat->soflag = 0;
-	dat->weflag = 0;
-	dat->eaflag = 0;
-	dat->sflag = 0;
-	dat->fflag = 0;
-	dat->cflag = 0;
-	dat->nomaplines = 0;
-	dat->initmaplane = NULL;
+	ft_initializedatb(dat);
 }
 
 static int	ft_contarfilas(int fdmap)
 {
-	int i;
-	char *line;
+	int		i;
+	char	*line;
 
 	line = NULL;
 	i = 1;
-	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 1))
+	while (((getnextline(&line, fdmap)) > 0) &&
+		(ft_strncmp(line, "\n", ft_strlen(line)) == 1))
 		free(line);
 	free(line);
-	while((getnextline(&line, fdmap)) > 0)
+	while ((getnextline(&line, fdmap)) > 0)
 	{
 		i++;
 		free(line);
@@ -65,11 +71,11 @@ static int	ft_contarfilas(int fdmap)
 	return (i);
 }
 
-void	ft_savemap(t_datos *dat, int fdmap)
+void		ft_savemap(t_datos *dat, int fdmap)
 {
-	char *line;
-	int i;
-	int cont;
+	char	*line;
+	int		i;
+	int		cont;
 
 	cont = 0;
 	i = 0;
@@ -79,7 +85,8 @@ void	ft_savemap(t_datos *dat, int fdmap)
 		getnextline(&line, fdmap);
 		free(line);
 	}
-	while (((getnextline(&line, fdmap)) > 0) && (ft_strncmp(line, "\n", ft_strlen(line)) == 0))
+	while (((getnextline(&line, fdmap)) > 0) &&
+		(ft_strncmp(line, "\n", ft_strlen(line)) == 0))
 		free(line);
 	dat->mapa[i] = ft_strdup(line);
 	i++;

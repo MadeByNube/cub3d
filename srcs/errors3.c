@@ -6,11 +6,17 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 12:40:20 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:47:42 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+void	ft_perrorrnumerico(void)
+{
+	perror("Error\nArgumento de R no es numerico o es negativo");
+	exit(14);
+}
 
 void	ft_rnumerico(char **aux)
 {
@@ -18,40 +24,35 @@ void	ft_rnumerico(char **aux)
 	int y;
 
 	x = 1;
-	y = 0;
-	while(aux[x])
+	while (aux[x])
 	{
-		while (aux[x][y])
+		y = 0;
+		while (aux[x][++y])
 		{
 			if (!ft_isdigit(aux[x][y]))
-			{
-				perror("Error\nArgumento de R no es numerico o es negativo");
-				exit(14);
-			}
-			y++;
+				ft_perrorrnumerico();
 		}
-		y = 0;
 		x++;
 	}
 	x = 1;
 	while (aux[x])
 	{
 		if (ft_atoi(aux[x]) == 0)
-			{
-				perror("Error\nResolucion invalida");
-				exit(15);
-			}
+		{
+			perror("Error\nResolucion invalida");
+			exit(15);
+		}
 		x++;
 	}
 }
 
 void	ft_saveconfig(int fdmap, t_datos *dat)
 {
-	char *line;
-	int comp;
-	int i;
+	char	*line;
+	int		comp;
+	int		i;
 
-	while((comp = getnextline(&line, fdmap)) > 0)
+	while ((comp = getnextline(&line, fdmap)) > 0)
 	{
 		i = 0;
 		while (line[i] == ' ')
@@ -72,8 +73,10 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 			ft_saveorerror_f(dat, line);
 		else if (line[i] == 'C' && line[i + 1] == ' ')
 			ft_saveorerror_c(dat, line);
-		else if (!(line[i]));
-		else break;
+		else
+			if (!(line[i]));
+		else
+			break ;
 		dat->nomaplines++;
 		free(line);
 	}
@@ -83,17 +86,19 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 
 void	ft_correctconfig(t_datos *dat)
 {
-	if (!dat->r || !dat->no || !dat->so || !dat->we || !dat->ea || !dat->s || !dat->f || !dat->c)
+	if (!dat->r || !dat->no || !dat->so || !dat->we
+		|| !dat->ea || !dat->s || !dat->f || !dat->c)
 	{
 		perror("Error\nConfiguracion incompleta");
 		exit(13);
 	}
 }
+
 void	ft_quitaespacios2000(char *f) //funciona pero no hago nada con el resultado (cambiar)
 {
-	int i;
-	int pos;
-	char *aux;
+	int		i;
+	int		pos;
+	char	*aux;
 
 	aux = ft_calloc(sizeof(char *) * ft_strlen(f), 1);
 	pos = 0;
@@ -114,14 +119,13 @@ void	ft_quitaespacios2000(char *f) //funciona pero no hago nada con el resultado
 
 char	*ft_convtexture(char *texture)
 {
-	int i;
-	int j;
-	char *aux;
+	int		i;
+	int		j;
+	char	*aux;
 
 	aux = ft_calloc(sizeof(char *) * ft_strlen(texture), 1);
 	i = 0;
 	j = 0;
-
 	while (texture[i] != '.' && texture[i + 1] != '/')
 		i++;
 	while (texture[i])

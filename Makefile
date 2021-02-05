@@ -8,12 +8,15 @@ SRCS		= srcs/genmap.c\
 			srcs/errors1.c\
 			srcs/errors2.c\
 			srcs/errors3.c\
+			srcs/errors4.c\
 			srcs/finalizer.c\
 			srcs/supportft.c\
 			srcs/saveconfigerror.c\
 			srcs/saveconfigerror2.c\
 			srcs/raycasting.c\
 			srcs/preraycasting.c\
+			srcs/preraycasting2.c\
+			srcs/dirpos.c\
 			srcs/raycasting2.c\
 			srcs/main_loop.c\
 			srcs/rays.c\

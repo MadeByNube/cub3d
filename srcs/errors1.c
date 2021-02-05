@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/21 16:31:07 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 12:02:56 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	ft_charsmap(char **mapa)
 	{
 		while (mapa[x][y])
 		{
-			if (!(mapa[x][y] == '0' || mapa[x][y] == '1' || mapa[x][y] == '2' || mapa[x][y] == ' '
-				|| mapa[x][y] == 'S' || mapa[x][y] == 'W' || mapa[x][y] == 'E' || mapa[x][y] == 'N'))
+			if (!(mapa[x][y] == '0' || mapa[x][y] == '1' ||
+				mapa[x][y] == '2' || mapa[x][y] == ' ' ||
+					mapa[x][y] == 'S' || mapa[x][y] == 'W' ||
+						mapa[x][y] == 'E' || mapa[x][y] == 'N'))
 			{
 				perror("Error\nCaracteres en mapa no validos");
 				exit(1);
@@ -32,7 +34,7 @@ void	ft_charsmap(char **mapa)
 			y++;
 		}
 		y = 0;
-		x++;		
+		x++;
 	}
 }
 
@@ -43,8 +45,8 @@ void	ft_erroresgeneral(t_datos *dat)
 
 void	ft_errorfoc(char *f)
 {
-	char 	**aux1;
-	char 	**aux2;
+	char	**aux1;
+	char	**aux2;
 
 	ft_quitaespacios2000(f);
 	aux1 = ft_split(f, ' ');
@@ -57,18 +59,19 @@ void	ft_errorfoc(char *f)
 
 void	ft_errortexture(char *texture)
 {
-	int i;
-	int fd;
-	char *aux;
+	int		i;
+	int		fd;
+	char	*aux;
 
 	i = ft_strlen(texture);
 	i--;
-	if (!(texture[i - 4]) || (texture[i - 3]) != '.' || (texture[i - 2]) != 'x' || 
-		(texture[i - 1]) != 'p' || (texture[i]) != 'm')
-		{
-			perror("Error\nTextura no valida");
-			exit(3);
-		}
+	if (!(texture[i - 4]) || (texture[i - 3]) != '.' ||
+		(texture[i - 2]) != 'x' ||
+			(texture[i - 1]) != 'p' || (texture[i]) != 'm')
+	{
+		perror("Error\nTextura no valida");
+		exit(3);
+	}
 	aux = ft_convtexture(texture);
 	if (!((fd = open(aux, O_RDONLY) > 0)))
 	{
@@ -80,9 +83,9 @@ void	ft_errortexture(char *texture)
 
 void	ft_errorerre(char *r)
 {
-	char **aux;
-	int x;
-	int y;
+	char	**aux;
+	int		x;
+	int		y;
 
 	x = 0;
 	y = 0;

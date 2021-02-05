@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 13:31:21 by cnavarro          #+#    #+#             */
-/*   Updated: 2020/12/16 11:24:12 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:44:01 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,55 +22,52 @@ void	ft_errorextmap(t_datos *dat)
 	i--;
 	if (!(aux[i - 4]) || (aux[i - 3]) != '.' || (aux[i - 2]) != 'c' ||
 		(aux[i - 1]) != 'u' || (aux[i]) != 'b')
-		{
-			perror("Error\nExtension de mapa invalida");
-			exit(5);
-		}
+	{
+		perror("Error\nExtension de mapa invalida");
+		exit(5);
+	}
 	free(aux);
+}
+
+void	ft_perrorvalmap(void)
+{
+	perror("Error\nHay 0 o mas de 1 posicion de jugador");
+	exit(6);
 }
 
 void	ft_valmap(char **mapa, t_datos *dat)
 {
-	int	x;
-	int	y;
-	int	a;
-	int	b;
-	int	cont;
+	int a[3];
 
-	a = 0;
-	b = 0;
-	cont = 0;
-	while (mapa[a])
+	a[0] = -1;
+	a[2] = 0;
+	while (mapa[++a[0]])
 	{
-		while (mapa[a][b])
+		a[1] = -1;
+		while (mapa[a[0]][++a[1]])
 		{
-			if (mapa[a][b] == 'N' || mapa[a][b] == 'S' ||
-				mapa[a][b] == 'E' || mapa[a][b] == 'W')
+			if (mapa[a[0]][a[1]] == 'N' || mapa[a[0]][a[1]] == 'S' ||
+				mapa[a[0]][a[1]] == 'E' || mapa[a[0]][a[1]] == 'W')
 			{
-				dat->cardinal = mapa[a][b];
-				x = a;
-				y = b;
-				cont++;
+				dat->cardinal = mapa[a[0]][a[1]];
+				dat->rct->plposx = a[0];
+				dat->rct->plposy = a[1];
+				a[2]++;
 			}
-			b++;
 		}
-		b = 0;
-		a++;
 	}
-	if (cont != 1)
-	{
-		perror("Error\nHay 0 o mas de 1 posicion de jugador");
-		exit(6);
-	}
-	dat->rct->plposx = x + 0.5;
-	dat->rct->plposy = y + 0.5;
-	ft_valmap2(mapa, x, y, dat);
+	if (a[2] != 1)
+		ft_perrorvalmap();
+	ft_valmap2(mapa, dat->rct->plposx, dat->rct->plposy, dat);
+	dat->rct->plposx += 0.5;
+	dat->rct->plposy += 0.5;
 }
 
 void	ft_valmap2(char **mapa, int x, int y, t_datos *dat)
 {
-	if (x == 0 || y == 0 || y == (ft_strlen(mapa[x]) - 1) || x == dat->filmap - 1 ||
-		y > ft_strlen(mapa[x + 1]) || y > ft_strlen(mapa[x - 1]))
+	if (x == 0 || y == 0 || y == (ft_strlen(mapa[x]) - 1) ||
+		x == dat->filmap - 1 || y > ft_strlen(mapa[x + 1]) ||
+			y > ft_strlen(mapa[x - 1]))
 	{
 		perror("Error\nMapa abierto");
 		exit(7);
@@ -90,10 +87,10 @@ void	ft_focnumerico(char **aux2)
 {
 	int		x;
 	int		y;
-	
+
 	x = 0;
 	y = 0;
-	while(aux2[x])
+	while (aux2[x])
 	{
 		while (aux2[x][y])
 		{
@@ -111,19 +108,5 @@ void	ft_focnumerico(char **aux2)
 	{
 		perror("Error\nColor debe tener 3 valores");
 		exit(10);
-	}
-}
-void	ft_focmaximo(char **aux2)
-{
-	int	x;
-
-	x = 0;
-	while(aux2[x])
-	{
-		if (ft_atoi(aux2[x]) < 0 || ft_atoi(aux2[x]) > 255)
-		{
-			perror("Error\nColor incorrecto");
-		}
-		x++;
 	}
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 11:48:52 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 13:22:19 by cnavarro         ###   ########.fr       */
+/*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
+/*   Updated: 2021/02/05 13:43:14 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-int	main(int args, char **argv)
+void	ft_focmaximo(char **aux2)
 {
-	t_datos	*dat;
+	int	x;
 
-	dat = ft_calloc(sizeof(t_datos), 1);
-	dat->rct = ft_calloc(sizeof(t_raycast), 1);
-	ft_args(args, argv, dat);
-	ft_genmap(argv[1], dat);
-	dat->mapname = argv[1];
-	ft_errors(dat);
-	ft_preraycasting(dat);
-	ft_raycasting(dat);
-	ft_frees(dat);
-	return (0);
+	x = 0;
+	while (aux2[x])
+	{
+		if (ft_atoi(aux2[x]) < 0 || ft_atoi(aux2[x]) > 255)
+		{
+			perror("Error\nColor incorrecto");
+		}
+		x++;
+	}
 }
