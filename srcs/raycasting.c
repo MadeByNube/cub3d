@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 11:52:12 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 11:25:26 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 11:51:38 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,5 @@ int		ft_pixel_get(t_datos *dat, int x, int y)
 
 	aux = dat->tex[dat->text].addr + (y * dat->tex[dat->text].size
 		+ x * (dat->tex[dat->text].bpp / 8));
-	return (*(unsigned int*)aux);
-}
-
-int		ft_pixel_get2(t_datos *dat, int x, int y)
-{
-	char	*aux;
-
-	aux = dat->tex[4].addr + (y * dat->tex[4].size + x * (dat->tex[4].bpp / 8));
 	return (*(unsigned int*)aux);
 }

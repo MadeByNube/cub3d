@@ -4,7 +4,7 @@ C 150,30,0
 SO                   ./textures/colorstone.xpm
 
 
-R    1200 800
+R    1920 1080
 NO       ./textures/bluestone.xpm
 WE   ./textures/greystone.xpm
 EA                     ./textures/purplestone.xpm

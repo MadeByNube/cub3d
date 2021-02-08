@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 12:35:44 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:32:20 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,26 +131,26 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
-# define movespeed			0.03 * 5
-# define rotspeed			0.04363325 * 5
+# define movespeed			0.03 * 2
+# define rotspeed			0.04363325 * 2
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <mlx.h>
+# include "../minilibx_beta/mlx.h"
 # include "../libft/libft.h"
 # include <math.h>
 typedef struct	s_textures
 {
-	void *img;	//
-	char *addr;	//
+	void *img;
+	char *addr;
 	char *rute;
-	int size;	//
-	int bpp;	//
-	int width;	//
-	int height;	//
-	int endian;	//
+	int size;
+	int bpp;
+	int width;
+	int height;
+	int endian;
 }				t_textures;
 typedef struct	s_raycast
 {
@@ -264,6 +264,7 @@ typedef struct	s_bmp
     int                 unused;
     int                 offset_begin;
     int                 header_bytes;
+	int					imagesize;
     short int           bmpplane;
     short int           bmpbpx;
 }				t_bmp;
@@ -327,7 +328,6 @@ int			ft_keyrelease(int key, t_datos *dat);
 int			ft_exit(t_datos *dat);
 int			ft_wallorient(t_datos *dat);
 int			ft_pixel_get(t_datos *dat, int x, int y);
-int			ft_pixel_get2(t_datos *dat, int x, int y);
 void		ft_presprites(t_datos *dat);
 int			ft_count2(t_datos *dat);
 void		ft_arraylogs(t_datos *dat);

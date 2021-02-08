@@ -6,11 +6,105 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 11:11:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 13:19:33 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 11:51:14 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+void	ft_rays4(t_datos *dat)
+{
+	dat->rct->lineheight = (int)(dat->r2 / dat->rct->perpwalldist);
+	dat->rct->drawstart = -dat->rct->lineheight / 2 + dat->r2 / 2;
+	if (dat->rct->drawstart < 0)
+		dat->rct->drawstart = 0;
+	dat->rct->drawend = dat->rct->lineheight / 2 + dat->r2 / 2;
+	if (dat->rct->drawend >= dat->r2)
+		dat->rct->drawend = dat->r2 - 1;
+	if (dat->rct->side == 0)
+		dat->wallx = dat->rct->plposy
+			+ dat->rct->perpwalldist * dat->rct->raydiry;
+	else
+		dat->wallx = dat->rct->plposx
+			+ dat->rct->perpwalldist * dat->rct->raydirx;
+	dat->wallx -= floor(dat->wallx);
+	if (dat->rct->side == 0 && dat->rct->raydirx > 0)
+		dat->text = 0;
+	if (dat->rct->side == 0 && dat->rct->raydirx <= 0)
+		dat->text = 1;
+	if (dat->rct->side == 1 && dat->rct->raydiry > 0)
+		dat->text = 2;
+	if (dat->rct->side == 1 && dat->rct->raydiry <= 0)
+		dat->text = 3;
+	dat->tex_x = (int)(dat->wallx * (double)dat->tex[dat->text].width);
+}
+
+void	ft_rays3(t_datos *dat)
+{
+	while (dat->rct->hit == 0)
+	{
+		if (dat->rct->sidedistx < dat->rct->sidedisty)
+		{
+			dat->rct->sidedistx += dat->rct->deltadistx;
+			dat->rct->mapx += dat->rct->stepx;
+			dat->rct->side = 0;
+		}
+		else
+		{
+			dat->rct->sidedisty += dat->rct->deltadisty;
+			dat->rct->mapy += dat->rct->stepy;
+			dat->rct->side = 1;
+		}
+		if (dat->mapint[dat->rct->mapx][dat->rct->mapy] > 0)
+			dat->rct->hit = 1;
+	}
+	if (dat->rct->side == 0)
+		dat->rct->perpwalldist = (dat->rct->mapx - dat->rct->plposx
+			+ (1 - dat->rct->stepx) / 2) / dat->rct->raydirx;
+	else
+		dat->rct->perpwalldist = (dat->rct->mapy - dat->rct->plposy
+			+ (1 - dat->rct->stepy) / 2) / dat->rct->raydiry;
+}
+
+void	ft_rays2(t_datos *dat)
+{
+	if (dat->rct->raydirx < 0)
+	{
+		dat->rct->stepx = -1;
+		dat->rct->sidedistx = (dat->rct->plposx - dat->rct->mapx)
+			* dat->rct->deltadistx;
+	}
+	else
+	{
+		dat->rct->stepx = 1;
+		dat->rct->sidedistx = (dat->rct->mapx + 1.0 - dat->rct->plposx)
+			* dat->rct->deltadistx;
+	}
+	if (dat->rct->raydiry < 0)
+	{
+		dat->rct->stepy = -1;
+		dat->rct->sidedisty = (dat->rct->plposy - dat->rct->mapy)
+			* dat->rct->deltadisty;
+	}
+	else
+	{
+		dat->rct->stepy = 1;
+		dat->rct->sidedisty = (dat->rct->mapy + 1.0 - dat->rct->plposy)
+			* dat->rct->deltadisty;
+	}
+}
+
+void	ft_rays1(t_datos *dat, int x)
+{
+	dat->rct->camx = 2 * x / (double)(dat->r1) - 1;
+	dat->rct->raydirx = dat->rct->dirx + dat->rct->planex * dat->rct->camx;
+	dat->rct->raydiry = dat->rct->diry + dat->rct->planey * dat->rct->camx;
+	dat->rct->mapx = (int)dat->rct->plposx;
+	dat->rct->mapy = (int)dat->rct->plposy;
+	dat->rct->deltadistx = fabs(1 / dat->rct->raydirx);
+	dat->rct->deltadisty = fabs(1 / dat->rct->raydiry);
+	dat->rct->hit = 0;
+}
 
 void	ft_rays(t_datos *dat)
 {
@@ -19,84 +113,10 @@ void	ft_rays(t_datos *dat)
 	x = 0;
 	while (x < dat->r1)
 	{
-		dat->rct->camx = 2 * x / (double)(dat->r1) - 1;
-		dat->rct->raydirx = dat->rct->dirx + dat->rct->planex * dat->rct->camx;
-		dat->rct->raydiry = dat->rct->diry + dat->rct->planey * dat->rct->camx;
-		dat->rct->mapx = (int)dat->rct->plposx;
-		dat->rct->mapy = (int)dat->rct->plposy;
-		dat->rct->deltadistx = fabs(1 / dat->rct->raydirx);
-		dat->rct->deltadisty = fabs(1 / dat->rct->raydiry);
-		dat->rct->hit = 0;
-		if (dat->rct->raydirx < 0)
-		{
-			dat->rct->stepx = -1;
-			dat->rct->sidedistx = (dat->rct->plposx - dat->rct->mapx)
-				* dat->rct->deltadistx;
-		}
-		else
-		{
-			dat->rct->stepx = 1;
-			dat->rct->sidedistx = (dat->rct->mapx + 1.0 - dat->rct->plposx)
-				* dat->rct->deltadistx;
-		}
-		if (dat->rct->raydiry < 0)
-		{
-			dat->rct->stepy = -1;
-			dat->rct->sidedisty = (dat->rct->plposy - dat->rct->mapy)
-				* dat->rct->deltadisty;
-		}
-		else
-		{
-			dat->rct->stepy = 1;
-			dat->rct->sidedisty = (dat->rct->mapy + 1.0 - dat->rct->plposy)
-				* dat->rct->deltadisty;
-		}
-		while (dat->rct->hit == 0)
-		{
-			if (dat->rct->sidedistx < dat->rct->sidedisty)
-			{
-				dat->rct->sidedistx += dat->rct->deltadistx;
-				dat->rct->mapx += dat->rct->stepx;
-				dat->rct->side = 0;
-			}
-			else
-			{
-				dat->rct->sidedisty += dat->rct->deltadisty;
-				dat->rct->mapy += dat->rct->stepy;
-				dat->rct->side = 1;
-			}
-			if (dat->mapint[dat->rct->mapx][dat->rct->mapy] > 0)
-				dat->rct->hit = 1;
-		}
-		if (dat->rct->side == 0)
-			dat->rct->perpwalldist = (dat->rct->mapx - dat->rct->plposx
-				+ (1 - dat->rct->stepx) / 2) / dat->rct->raydirx;
-		else
-			dat->rct->perpwalldist = (dat->rct->mapy - dat->rct->plposy
-				+ (1 - dat->rct->stepy) / 2) / dat->rct->raydiry;
-		dat->rct->lineheight = (int)(dat->r2 / dat->rct->perpwalldist);
-		dat->rct->drawstart = -dat->rct->lineheight / 2 + dat->r2 / 2;
-		if (dat->rct->drawstart < 0)
-			dat->rct->drawstart = 0;
-		dat->rct->drawend = dat->rct->lineheight / 2 + dat->r2 / 2;
-		if (dat->rct->drawend >= dat->r2)
-			dat->rct->drawend = dat->r2 - 1;
-		if (dat->rct->side == 0)
-			dat->wallx = dat->rct->plposy
-				+ dat->rct->perpwalldist * dat->rct->raydiry;
-		else
-			dat->wallx = dat->rct->plposx
-				+ dat->rct->perpwalldist * dat->rct->raydirx;
-		dat->wallx -= floor(dat->wallx);
-		if (dat->rct->side == 0 && dat->rct->raydirx > 0)
-			dat->text = 0;
-		if (dat->rct->side == 0 && dat->rct->raydirx <= 0)
-			dat->text = 1;
-		if (dat->rct->side == 1 && dat->rct->raydiry > 0)
-			dat->text = 2;
-		if (dat->rct->side == 1 && dat->rct->raydiry <= 0)
-			dat->text = 3;
-		dat->tex_x = (int)(dat->wallx * (double)dat->tex[dat->text].width);
+		ft_rays1(dat, x);
+		ft_rays2(dat);
+		ft_rays3(dat);
+		ft_rays4(dat);
 		if (dat->rct->side == 0 && dat->rct->raydirx > 0)
 			dat->tex_x = dat->tex[dat->text].width - dat->tex_x - 1;
 		if (dat->rct->side == 1 && dat->rct->raydiry < 0)
@@ -208,8 +228,7 @@ void	ft_aftersort(t_datos *dat, int i)
 		(1 + dat->transformx / dat->transformy));
 	dat->spriteheight = abs((int)(dat->r2 / (dat->transformy)));
 	dat->drawstarty = -dat->spriteheight / 2 + dat->r2 / 2;
-	if (dat->drawstarty < 0)
-		dat->drawstarty = 0;
+	dat->drawstarty < 0 ? dat->drawstarty = 0 : dat->drawstarty;
 	dat->drawendy = dat->spriteheight / 2 + dat->r2 / 2;
 	if (dat->drawendy >= dat->r2)
 		dat->drawendy = dat->r2 - 1;
@@ -234,9 +253,8 @@ void	ft_drawsprite(t_datos *dat)
 	stripe = dat->drawstartx;
 	while (stripe < dat->drawendx)
 	{
-		tex_x = (int)(256 * (stripe -
-			(-dat->spritewidth / 2 + dat->spritescreenx))
-			* dat->tex->width / dat->spritewidth) / 256;
+		tex_x = (int)(256 * (stripe - (-dat->spritewidth 
+			/ 2 + dat->spritescreenx)) * dat->tex->width / dat->spritewidth) / 256;
 		y = dat->drawstarty;
 		if (dat->transformy > 0 && stripe > 0 && stripe < dat->r1 &&
 			dat->transformy < dat->zbuffer[stripe])
@@ -244,10 +262,9 @@ void	ft_drawsprite(t_datos *dat)
 			{
 				d = (y) * 256 - dat->r2 * 128 + dat->spriteheight * 128;
 				tex_y = ((d * dat->tex->height) / dat->spriteheight) / 256;
-				color = ft_pixel_get2(dat, tex_x, tex_y);
+				color = *(unsigned int *)(dat->tex[4].addr + (tex_y * dat->tex[4].size + tex_x * (dat->tex[4].bpp / 8)));
 				if ((color & 0x00FFFFFF) != 0)
-					ft_mlx_pixel_put(dat, stripe, y,
-						ft_pixel_get2(dat, tex_x, tex_y));
+					ft_mlx_pixel_put(dat, stripe, y, color);
 				y++;
 			}
 		stripe++;

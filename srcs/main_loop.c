@@ -6,17 +6,19 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 13:24:26 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:23:11 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-int	ft_main_loop(t_datos *dat)
+int		ft_main_loop(t_datos *dat)
 {
 	dat->img = mlx_new_image(dat->mlx_ptr, dat->r1, dat->r2);
 	dat->dir = mlx_get_data_addr(dat->img, &dat->bits_per_pixel,
 		&dat->line_length, &dat->endian);
+	if (dat->save == 1)
+		dat->line_length = dat->r1 * 4;
 	key_hook(dat);
 	ft_rays(dat);
 	if (dat->save == 1)
@@ -30,6 +32,7 @@ void	ft_image(t_datos *dat)
 {
 	t_bmp *bmp;
 
+	
 	if (!(bmp = malloc(sizeof(t_bmp))))
 	{
 		perror("Error:\n No se reserva memoria para bmp");
@@ -54,7 +57,7 @@ void	ft_writeheader(t_datos *dat, t_bmp *bmp)
 	write(bmp->fdsave, &bmp->bmpplane, sizeof(unsigned short int));
 	write(bmp->fdsave, &bmp->bmpbpx, sizeof(unsigned short int));
 	write(bmp->fdsave, &bmp->unused, sizeof(unsigned int));
-	write(bmp->fdsave, &bmp->unused, sizeof(unsigned int));
+	write(bmp->fdsave, &bmp->imagesize, sizeof(unsigned int));
 	write(bmp->fdsave, &bmp->unused, sizeof(unsigned int));
 	write(bmp->fdsave, &bmp->unused, sizeof(unsigned int));
 	write(bmp->fdsave, &bmp->unused, sizeof(unsigned int));
@@ -66,6 +69,7 @@ void	ft_writeheader(t_datos *dat, t_bmp *bmp)
 void	ft_initsave(t_datos *dat, t_bmp *bmp)
 {
 	bmp->filesize = 54 + dat->r2 * dat->line_length;
+	bmp->imagesize = dat->r1 * dat->r2;
 	bmp->unused = 0;
 	bmp->offset_begin = 54;
 	bmp->header_bytes = 40;
