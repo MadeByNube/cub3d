@@ -6,13 +6,13 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:48:29 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 12:27:12 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 13:11:29 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-int		ft_color(char *cadena)
+int			ft_color(char *cadena)
 {
 	char	**aux;
 	char	**colores;
@@ -27,7 +27,46 @@ int		ft_color(char *cadena)
 	return (color);
 }
 
-int		key_hook(t_datos *dat)
+void		key_hook4(t_datos *dat)
+{
+	if (dat->right == 1)
+	{
+		dat->rct->olddirx = dat->rct->dirx;
+		dat->rct->dirx = dat->rct->dirx * cos(-rotspeed)
+			- dat->rct->diry * sin(-rotspeed);
+		dat->rct->diry = dat->rct->olddirx * sin(-rotspeed)
+			+ dat->rct->diry * cos(-rotspeed);
+		dat->rct->oldplanex = dat->rct->planex;
+		dat->rct->planex = dat->rct->planex * cos(-rotspeed)
+			- dat->rct->planey * sin(-rotspeed);
+		dat->rct->planey = dat->rct->oldplanex * sin(-rotspeed)
+			+ dat->rct->planey * cos(-rotspeed);
+	}
+}
+
+void		key_hook3(t_datos *dat)
+{
+	if (dat->keya == 1)
+	{
+		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * movespeed)]
+			[(int)dat->rct->plposy] == 0)
+			dat->rct->plposx -= dat->rct->planex * movespeed;
+		if (dat->mapint[(int)dat->rct->plposx]
+			[(int)(dat->rct->plposy - dat->rct->planey * movespeed)] == 0)
+			dat->rct->plposy -= dat->rct->planey * movespeed;
+	}
+	if (dat->keyd == 1)
+	{
+		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * movespeed)]
+			[(int)dat->rct->plposy] == 0)
+			dat->rct->plposx += dat->rct->planex * movespeed;
+		if (dat->mapint[(int)dat->rct->plposx]
+			[(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)
+			dat->rct->plposy += dat->rct->planey * movespeed;
+	}
+}
+
+void		key_hook2(t_datos *dat)
 {
 	if (dat->keyw == 1)
 	{
@@ -47,37 +86,13 @@ int		key_hook(t_datos *dat)
 			[(int)(dat->rct->plposy - dat->rct->diry * movespeed)] == 0)
 			dat->rct->plposy -= dat->rct->diry * movespeed;
 	}
-	if (dat->keya == 1)
-	{
-		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * movespeed)]
-			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx -= dat->rct->planex * movespeed;
-		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy - dat->rct->planey * movespeed)] == 0)
-			dat->rct->plposy -= dat->rct->planey * movespeed;
-	}
-	if (dat->keyd == 1)
-	{
-		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * movespeed)]
-			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx += dat->rct->planex * movespeed;
-		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)
-			dat->rct->plposy += dat->rct->planey * movespeed;
-	}
-	if (dat->right == 1)
-	{
-		dat->rct->olddirx = dat->rct->dirx;
-		dat->rct->dirx = dat->rct->dirx * cos(-rotspeed)
-			- dat->rct->diry * sin(-rotspeed);
-		dat->rct->diry = dat->rct->olddirx * sin(-rotspeed)
-			+ dat->rct->diry * cos(-rotspeed);
-		dat->rct->oldplanex = dat->rct->planex;
-		dat->rct->planex = dat->rct->planex * cos(-rotspeed)
-			- dat->rct->planey * sin(-rotspeed);
-		dat->rct->planey = dat->rct->oldplanex * sin(-rotspeed)
-			+ dat->rct->planey * cos(-rotspeed);
-	}
+}
+
+int			key_hook(t_datos *dat)
+{
+	key_hook2(dat);
+	key_hook3(dat);
+	key_hook4(dat);
 	if (dat->left == 1)
 	{
 		dat->rct->olddirx = dat->rct->dirx;

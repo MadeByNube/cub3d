@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 12:02:56 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 14:23:16 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	ft_erroresgeneral(t_datos *dat)
 	ft_errorextmap(dat);
 }
 
-void	ft_errorfoc(char *f)
+void	ft_errorfoc(char *f, t_datos *dat)
 {
 	char	**aux1;
 	char	**aux2;
 
-	ft_quitaespacios2000(f);
+	ft_quitaespacios2000(f, dat);
 	aux1 = ft_split(f, ' ');
 	aux2 = ft_split(aux1[1], ',');
 	ft_freematrix(aux1);

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:48:43 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/08 12:32:20 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 10:05:16 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@
 # define KEY_PAD_ADD		69
 # define KEY_PAD_ENTER		76
 # define KEY_PAD_DOT		65
-# define movespeed			0.03 * 2
-# define rotspeed			0.04363325 * 2
+# define movespeed			0.03 * 3
+# define rotspeed			0.04363325 * 3
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -255,6 +255,7 @@ typedef struct	s_datos
 	int drawstartx;
 	int drawendx;
 	int save;
+	int stripe;
 }				t_datos;
 
 typedef struct	s_bmp
@@ -278,7 +279,7 @@ void		ft_args(int args, char **argv, t_datos *dat);
 void		ft_erroresgeneral(t_datos *dat);
 void		ft_errorextmap(t_datos *dat);
 void		ft_errorargs(void);
-void		ft_errorfoc(char *f);
+void		ft_errorfoc(char *f, t_datos *dat);
 void		ft_focnumerico(char **aux2);
 void		ft_rnumerico(char **aux);
 void		ft_focmaximo(char **aux2);
@@ -289,7 +290,7 @@ void		ft_errorsmap(t_datos *dat);
 void		ft_saveconfig(int fdmap, t_datos *dat);
 void		ft_saveconfigb(t_datos *dat, int i, char *line);
 void		ft_correctconfig(t_datos *dat);
-void		ft_quitaespacios2000(char *f);
+void		ft_quitaespacios2000(char *f, t_datos *dat);
 char		*ft_convtexture(char *texture);
 
 void    	ft_saveorerror_r(t_datos *dat, char *line);

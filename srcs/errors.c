@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:31 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 13:21:28 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 14:26:46 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	ft_errorsconfig(t_datos *dat)
 	ft_errortexture(dat->we);
 	ft_errortexture(dat->ea);
 	ft_errortexture(dat->s);
-	ft_errorfoc(dat->f);
-	ft_errorfoc(dat->c);
+	ft_errorfoc(dat->f, dat);
+	free(dat->f);
+	ft_errorfoc(dat->c, dat);
+	system("leaks cub3D");
 }
 
 void	ft_errors(t_datos *dat)

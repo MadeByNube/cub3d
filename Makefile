@@ -20,6 +20,8 @@ SRCS		= srcs/genmap.c\
 			srcs/raycasting2.c\
 			srcs/main_loop.c\
 			srcs/rays.c\
+			srcs/rays2.c\
+			srcs/rays3.c\
 			srcs/textures.c
 
 OBJS		= $(SRCS:.c=.o)

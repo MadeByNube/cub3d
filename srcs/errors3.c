@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 13:47:42 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 10:03:34 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 			ft_saveorerror_f(dat, line);
 		else if (line[i] == 'C' && line[i + 1] == ' ')
 			ft_saveorerror_c(dat, line);
-		else
-			if (!(line[i]));
+		else if (!(line[i]))
+			i = i;
 		else
 			break ;
 		dat->nomaplines++;
@@ -94,7 +94,7 @@ void	ft_correctconfig(t_datos *dat)
 	}
 }
 
-void	ft_quitaespacios2000(char *f) //funciona pero no hago nada con el resultado (cambiar)
+void	ft_quitaespacios2000(char *f, t_datos *dat)
 {
 	int		i;
 	int		pos;
@@ -114,22 +114,7 @@ void	ft_quitaespacios2000(char *f) //funciona pero no hago nada con el resultado
 		else
 			aux[i++] = f[pos++];
 	}
+	f = ft_strdup(aux);
 	free(aux);
-}
-
-char	*ft_convtexture(char *texture)
-{
-	int		i;
-	int		j;
-	char	*aux;
-
-	aux = ft_calloc(sizeof(char *) * ft_strlen(texture), 1);
-	i = 0;
-	j = 0;
-	while (texture[i] != '.' && texture[i + 1] != '/')
-		i++;
-	while (texture[i])
-		aux[j++] = texture[i++];
-	aux[j] = '\0';
-	return (aux);
+	aux = NULL;
 }

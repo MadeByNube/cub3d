@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/08 12:23:11 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:51:32 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_image(t_datos *dat)
 {
 	t_bmp *bmp;
 
-	
 	if (!(bmp = malloc(sizeof(t_bmp))))
 	{
 		perror("Error:\n No se reserva memoria para bmp");
