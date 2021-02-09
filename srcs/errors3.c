@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 12:23:53 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/09 10:03:34 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 11:11:11 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,45 @@ void	ft_rnumerico(char **aux)
 	}
 }
 
+int		ft_saveconfig2(char *line, t_datos *dat, int i)
+{
+	if (line[i] == 'R' && line[i + 1] == ' ')
+		ft_saveorerror_r(dat, line);
+	else if (line[i] == 'N' && line[i + 1] == 'O')
+		ft_saveorerror_no(dat, line);
+	else if (line[i] == 'S' && line[i + 1] == 'O')
+		ft_saveorerror_so(dat, line);
+	else if (line[i] == 'W' && line[i + 1] == 'E')
+		ft_saveorerror_we(dat, line);
+	else if (line[i] == 'E' && line[i + 1] == 'A')
+		ft_saveorerror_ea(dat, line);
+	else if (line[i] == 'S' && line[i + 1] == ' ')
+		ft_saveorerror_s(dat, line);
+	else if (line[i] == 'F' && line[i + 1] == ' ')
+		ft_saveorerror_f(dat, line);
+	else if (line[i] == 'C' && line[i + 1] == ' ')
+		ft_saveorerror_c(dat, line);
+	else if (!(line[i]))
+		i = i;
+	else
+		return (1);
+	return (0);
+}
+
 void	ft_saveconfig(int fdmap, t_datos *dat)
 {
 	char	*line;
 	int		comp;
 	int		i;
+	int		b;
 
 	while ((comp = getnextline(&line, fdmap)) > 0)
 	{
 		i = 0;
 		while (line[i] == ' ')
 			i++;
-		if (line[i] == 'R' && line[i + 1] == ' ')
-			ft_saveorerror_r(dat, line);
-		else if (line[i] == 'N' && line[i + 1] == 'O')
-			ft_saveorerror_no(dat, line);
-		else if (line[i] == 'S' && line[i + 1] == 'O')
-			ft_saveorerror_so(dat, line);
-		else if (line[i] == 'W' && line[i + 1] == 'E')
-			ft_saveorerror_we(dat, line);
-		else if (line[i] == 'E' && line[i + 1] == 'A')
-			ft_saveorerror_ea(dat, line);
-		else if (line[i] == 'S' && line[i + 1] == ' ')
-			ft_saveorerror_s(dat, line);
-		else if (line[i] == 'F' && line[i + 1] == ' ')
-			ft_saveorerror_f(dat, line);
-		else if (line[i] == 'C' && line[i + 1] == ' ')
-			ft_saveorerror_c(dat, line);
-		else if (!(line[i]))
-			i = i;
-		else
+		b = ft_saveconfig2(line, dat, i);
+		if (b == 1)
 			break ;
 		dat->nomaplines++;
 		free(line);
@@ -84,37 +93,22 @@ void	ft_saveconfig(int fdmap, t_datos *dat)
 	free(line);
 }
 
-void	ft_correctconfig(t_datos *dat)
+void	ft_errorerre(char *r)
 {
-	if (!dat->r || !dat->no || !dat->so || !dat->we
-		|| !dat->ea || !dat->s || !dat->f || !dat->c)
-	{
-		perror("Error\nConfiguracion incompleta");
-		exit(13);
-	}
-}
+	char	**aux;
+	int		x;
+	int		y;
 
-void	ft_quitaespacios2000(char *f, t_datos *dat)
-{
-	int		i;
-	int		pos;
-	char	*aux;
-
-	aux = ft_calloc(sizeof(char *) * ft_strlen(f), 1);
-	pos = 0;
-	i = 0;
-	while (f[pos] == ' ')
-		pos++;
-	aux[i++] = f[pos++];
-	aux[i++] = f[pos++];
-	while (f[pos])
+	x = 0;
+	y = 0;
+	aux = ft_split(r, ' ');
+	while (aux[x])
+		x++;
+	if (x != 3)
 	{
-		if (f[pos] == ' ')
-			pos++;
-		else
-			aux[i++] = f[pos++];
+		perror("Error\nArgumentos en R incorrectos");
+		exit(4);
 	}
-	f = ft_strdup(aux);
-	free(aux);
-	aux = NULL;
+	ft_rnumerico(aux);
+	ft_freematrix(aux);
 }

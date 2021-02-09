@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 11:22:39 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/08 14:23:16 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 11:09:43 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,27 @@ void	ft_erroresgeneral(t_datos *dat)
 	ft_errorextmap(dat);
 }
 
-void	ft_errorfoc(char *f, t_datos *dat)
+void	ft_errorf(t_datos *dat)
 {
 	char	**aux1;
 	char	**aux2;
 
-	ft_quitaespacios2000(f, dat);
-	aux1 = ft_split(f, ' ');
+	ft_quitaespacios2000f(dat);
+	aux1 = ft_split(dat->f, ' ');
+	aux2 = ft_split(aux1[1], ',');
+	ft_freematrix(aux1);
+	ft_focnumerico(aux2);
+	ft_focmaximo(aux2);
+	ft_freematrix(aux2);
+}
+
+void	ft_errorc(t_datos *dat)
+{
+	char	**aux1;
+	char	**aux2;
+
+	ft_quitaespacios2000c(dat);
+	aux1 = ft_split(dat->c, ' ');
 	aux2 = ft_split(aux1[1], ',');
 	ft_freematrix(aux1);
 	ft_focnumerico(aux2);
@@ -79,24 +93,4 @@ void	ft_errortexture(char *texture)
 		exit(11);
 	}
 	free(aux);
-}
-
-void	ft_errorerre(char *r)
-{
-	char	**aux;
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	aux = ft_split(r, ' ');
-	while (aux[x])
-		x++;
-	if (x != 3)
-	{
-		perror("Error\nArgumentos en R incorrectos");
-		exit(4);
-	}
-	ft_rnumerico(aux);
-	ft_freematrix(aux);
 }

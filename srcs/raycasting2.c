@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:48:29 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/08 13:11:29 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 11:20:03 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void		key_hook4(t_datos *dat)
 	if (dat->right == 1)
 	{
 		dat->rct->olddirx = dat->rct->dirx;
-		dat->rct->dirx = dat->rct->dirx * cos(-rotspeed)
-			- dat->rct->diry * sin(-rotspeed);
-		dat->rct->diry = dat->rct->olddirx * sin(-rotspeed)
-			+ dat->rct->diry * cos(-rotspeed);
+		dat->rct->dirx = dat->rct->dirx * cos(-ROTSPEED)
+			- dat->rct->diry * sin(-ROTSPEED);
+		dat->rct->diry = dat->rct->olddirx * sin(-ROTSPEED)
+			+ dat->rct->diry * cos(-ROTSPEED);
 		dat->rct->oldplanex = dat->rct->planex;
-		dat->rct->planex = dat->rct->planex * cos(-rotspeed)
-			- dat->rct->planey * sin(-rotspeed);
-		dat->rct->planey = dat->rct->oldplanex * sin(-rotspeed)
-			+ dat->rct->planey * cos(-rotspeed);
+		dat->rct->planex = dat->rct->planex * cos(-ROTSPEED)
+			- dat->rct->planey * sin(-ROTSPEED);
+		dat->rct->planey = dat->rct->oldplanex * sin(-ROTSPEED)
+			+ dat->rct->planey * cos(-ROTSPEED);
 	}
 }
 
@@ -48,21 +48,21 @@ void		key_hook3(t_datos *dat)
 {
 	if (dat->keya == 1)
 	{
-		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * movespeed)]
+		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->planex * MOVESPEED)]
 			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx -= dat->rct->planex * movespeed;
+			dat->rct->plposx -= dat->rct->planex * MOVESPEED;
 		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy - dat->rct->planey * movespeed)] == 0)
-			dat->rct->plposy -= dat->rct->planey * movespeed;
+			[(int)(dat->rct->plposy - dat->rct->planey * MOVESPEED)] == 0)
+			dat->rct->plposy -= dat->rct->planey * MOVESPEED;
 	}
 	if (dat->keyd == 1)
 	{
-		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * movespeed)]
+		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->planex * MOVESPEED)]
 			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx += dat->rct->planex * movespeed;
+			dat->rct->plposx += dat->rct->planex * MOVESPEED;
 		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy + dat->rct->planey * movespeed)] == 0)
-			dat->rct->plposy += dat->rct->planey * movespeed;
+			[(int)(dat->rct->plposy + dat->rct->planey * MOVESPEED)] == 0)
+			dat->rct->plposy += dat->rct->planey * MOVESPEED;
 	}
 }
 
@@ -70,21 +70,21 @@ void		key_hook2(t_datos *dat)
 {
 	if (dat->keyw == 1)
 	{
-		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->dirx * movespeed)]
+		if (dat->mapint[(int)(dat->rct->plposx + dat->rct->dirx * MOVESPEED)]
 			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx += dat->rct->dirx * movespeed;
+			dat->rct->plposx += dat->rct->dirx * MOVESPEED;
 		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy + dat->rct->diry * movespeed)] == 0)
-			dat->rct->plposy += dat->rct->diry * movespeed;
+			[(int)(dat->rct->plposy + dat->rct->diry * MOVESPEED)] == 0)
+			dat->rct->plposy += dat->rct->diry * MOVESPEED;
 	}
 	if (dat->keys == 1)
 	{
-		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->dirx * movespeed)]
+		if (dat->mapint[(int)(dat->rct->plposx - dat->rct->dirx * MOVESPEED)]
 			[(int)dat->rct->plposy] == 0)
-			dat->rct->plposx -= dat->rct->dirx * movespeed;
+			dat->rct->plposx -= dat->rct->dirx * MOVESPEED;
 		if (dat->mapint[(int)dat->rct->plposx]
-			[(int)(dat->rct->plposy - dat->rct->diry * movespeed)] == 0)
-			dat->rct->plposy -= dat->rct->diry * movespeed;
+			[(int)(dat->rct->plposy - dat->rct->diry * MOVESPEED)] == 0)
+			dat->rct->plposy -= dat->rct->diry * MOVESPEED;
 	}
 }
 
@@ -96,15 +96,15 @@ int			key_hook(t_datos *dat)
 	if (dat->left == 1)
 	{
 		dat->rct->olddirx = dat->rct->dirx;
-		dat->rct->dirx = dat->rct->dirx * cos(rotspeed)
-			- dat->rct->diry * sin(rotspeed);
-		dat->rct->diry = dat->rct->olddirx * sin(rotspeed)
-			+ dat->rct->diry * cos(rotspeed);
+		dat->rct->dirx = dat->rct->dirx * cos(ROTSPEED)
+			- dat->rct->diry * sin(ROTSPEED);
+		dat->rct->diry = dat->rct->olddirx * sin(ROTSPEED)
+			+ dat->rct->diry * cos(ROTSPEED);
 		dat->rct->oldplanex = dat->rct->planex;
-		dat->rct->planex = dat->rct->planex * cos(rotspeed)
-			- dat->rct->planey * sin(rotspeed);
-		dat->rct->planey = dat->rct->oldplanex * sin(rotspeed)
-			+ dat->rct->planey * cos(rotspeed);
+		dat->rct->planex = dat->rct->planex * cos(ROTSPEED)
+			- dat->rct->planey * sin(ROTSPEED);
+		dat->rct->planey = dat->rct->oldplanex * sin(ROTSPEED)
+			+ dat->rct->planey * cos(ROTSPEED);
 	}
 	return (0);
 }

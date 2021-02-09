@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:49:33 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/08 13:01:35 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 10:40:15 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_verline(int x, t_datos *dat)
 	int floor;
 	int ceiling;
 
-	floor = ft_color(dat->f);
-	ceiling = ft_color(dat->c);
+	floor = ft_color(dat->fnew);
+	ceiling = ft_color(dat->cnew);
 	y = -1;
 	dat->zbuffer[x] = dat->rct->perpwalldist;
 	while (++y < dat->rct->drawstart)

@@ -6,7 +6,7 @@
 /*   By: cnavarro <cnavarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:33:01 by cnavarro          #+#    #+#             */
-/*   Updated: 2021/02/05 12:37:18 by cnavarro         ###   ########.fr       */
+/*   Updated: 2021/02/09 10:39:13 by cnavarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ void		ft_initializedat(t_datos *dat)
 	dat->f = NULL;
 	dat->c = NULL;
 	dat->mapname = NULL;
-	dat->r = 0;
-	dat->no = 0;
-	dat->so = 0;
-	dat->we = 0;
-	dat->ea = 0;
-	dat->s = 0;
-	dat->f = 0;
-	dat->c = 0;
 	ft_initializedatb(dat);
 }
 
