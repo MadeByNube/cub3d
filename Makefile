@@ -54,5 +54,6 @@ clean:
 	@echo "\033[0;31m[Deleting Objects...]"
 	@make -C libft/ clean
 	@rm -f libmlx.dylib
+	@rm -f screenshot.bmp
 	@rm -f $(OBJS)
 re:		fclean $(NAME)
